@@ -3,7 +3,7 @@ import type { ConfigContext, ExpoConfig } from 'expo/config';
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'Herceg Novi Guide',
-  slug: 'herceg-novi-guide',
+  slug: 'hercegnoviguide',
   scheme: 'hercegnoviguide',
   version: '1.0.0',
   orientation: 'portrait',
@@ -15,13 +15,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     backgroundColor: '#F6F1E7',
   },
   assetBundlePatterns: ['**/*'],
-  privacyPolicy: 'https://mojflow.co/privacy',
   runtimeVersion: {
     policy: 'appVersion',
   },
   updates: {
     enabled: true,
-    checkOnLaunch: 'always',
     fallbackToCacheTimeout: 30000,
     url: 'https://u.expo.dev/YOUR_PROJECT_ID',
   },
@@ -30,7 +28,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: 'com.mojflow.hercegnoviguide',
     supportsTablet: true,
     usesAppleSignIn: false,
-    minimumOsVersion: '16.0',
     buildNumber: '1',
     infoPlist: {
       NSLocationWhenInUseUsageDescription:
@@ -43,9 +40,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     package: 'com.mojflow.hercegnoviguide',
     versionCode: 1,
-    targetSdkVersion: 35,
-    compileSdkVersion: 35,
-    minSdkVersion: 24,
     adaptiveIcon: {
       foregroundImage: './assets/android-icon-foreground.png',
       backgroundColor: '#F6F1E7',
@@ -64,7 +58,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     'expo-router',
-    'expo-image',
     'expo-font',
     [
       'expo-location',

@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 
 import { AppText } from '@/src/components/AppText';
 import { colors, radii, shadows, spacing } from '@/src/theme';
+import type { ImageSource } from 'expo-image';
 import type { HeroVariant } from '@/src/types/place';
 
 type HeroCardProps = {
@@ -11,13 +12,13 @@ type HeroCardProps = {
   subtitle: string;
   badge?: string;
   variant?: HeroVariant;
-  imageUri?: string;
+  imageSource?: ImageSource;
 };
 
-export const HeroCard = ({ title, subtitle, badge, imageUri }: HeroCardProps) => (
+export const HeroCard = ({ title, subtitle, badge, imageSource }: HeroCardProps) => (
   <View style={styles.card} accessible={true} accessibilityLabel={`${badge ? badge + ', ' : ''}${title}, ${subtitle}`}>
-    {imageUri ? (
-      <Image source={{ uri: imageUri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
+    {imageSource ? (
+      <Image source={imageSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
     ) : null}
     <LinearGradient
       colors={['transparent', 'rgba(0,0,0,0.65)']}

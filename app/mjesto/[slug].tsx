@@ -57,7 +57,7 @@ export default function PlaceDetailScreen() {
           subtitle={place.address}
           title={place.title}
           variant={place.heroVariant}
-          imageUri={getHeroImageUri(place.id, place.category, 1200, 700)}
+          imageSource={getHeroImageUri(place.id, place.category)}
         />
         <Pressable
           accessibilityRole="button"

@@ -1,0 +1,730 @@
+{
+  "herceg-novi-panorama-1.jpg": {
+    "query": "Herceg Novi Montenegro",
+    "photographer": "Zayide Sayar",
+    "photographerUrl": "https://www.pexels.com/@zayide-sayar-2157793559",
+    "pexelsUrl": "https://www.pexels.com/photo/night-view-of-grand-mosque-in-bursa-turkiye-36645001/",
+    "alt": "Illuminated Grand Mosque in Bursa, Türkiye, showcasing traditional Ottoman architecture at night.",
+    "width": 6000,
+    "height": 4000
+  },
+  "herceg-novi-panorama-2.jpg": {
+    "query": "Herceg Novi Montenegro",
+    "photographer": "Boris Hamer",
+    "photographerUrl": "https://www.pexels.com/@borishamer",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-view-of-herceg-novi-with-kanli-kula-tower-33460843/",
+    "alt": "Explore the stunning coastal view of Herceg Novi, Montenegro with the historic Kanli Kula tower by the Adriatic Sea.",
+    "width": 6452,
+    "height": 4301
+  },
+  "herceg-novi-panorama-3.jpg": {
+    "query": "Herceg Novi Montenegro",
+    "photographer": "Ajdin Coric",
+    "photographerUrl": "https://www.pexels.com/@ajdin-coric-504250286",
+    "pexelsUrl": "https://www.pexels.com/photo/montenegro-27607076/",
+    "alt": "A serene view of the Herceg Novi Bay with a boat cutting through the tranquil waters, surrounded by lush hills.",
+    "width": 6000,
+    "height": 4000
+  },
+  "herceg-novi-old-town-1.jpg": {
+    "query": "Herceg Novi old town",
+    "photographer": "Konstantin Artushkevich",
+    "photographerUrl": "https://www.pexels.com/@konstantin-artushkevich-2159355264",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-view-of-sighnaghi-in-kakheti-georgia-36043183/",
+    "alt": "Beautiful panoramic view of Sighnaghi, a charming town in the lush Kakheti region of Georgia.",
+    "width": 6000,
+    "height": 4000
+  },
+  "herceg-novi-old-town-2.jpg": {
+    "query": "Herceg Novi old town",
+    "photographer": "Павел  Хлыстунов",
+    "photographerUrl": "https://www.pexels.com/@paul",
+    "pexelsUrl": "https://www.pexels.com/photo/view-of-a-village-5996369/",
+    "alt": "Aerial view of a historic village with ancient fortifications and diverse architecture.",
+    "width": 7378,
+    "height": 4906
+  },
+  "herceg-novi-fortress-1.jpg": {
+    "query": "Herceg Novi fortress sea",
+    "photographer": "Roman S",
+    "photographerUrl": "https://www.pexels.com/@roman-s-664858161",
+    "pexelsUrl": "https://www.pexels.com/photo/beautiful-montenegrin-coastline-and-mountain-view-36325130/",
+    "alt": "Scenic view of Montenegro's coastline with lush autumn foliage and distant sea.",
+    "width": 6016,
+    "height": 4000
+  },
+  "herceg-novi-fortress-2.jpg": {
+    "query": "Herceg Novi fortress sea",
+    "photographer": "jade xie",
+    "photographerUrl": "https://www.pexels.com/@jade-xie-2153337300",
+    "pexelsUrl": "https://www.pexels.com/photo/serene-coastal-view-from-montenegrin-landmark-36039430/",
+    "alt": "Breathtaking view of the Adriatic coast with traditional architecture and lush mountains in Montenegro.",
+    "width": 6240,
+    "height": 4160
+  },
+  "boka-kotorska-1.jpg": {
+    "query": "Bay of Kotor Montenegro",
+    "photographer": "Ann H",
+    "photographerUrl": "https://www.pexels.com/@ann-h-45017",
+    "pexelsUrl": "https://www.pexels.com/photo/printed-text-on-orange-surface-6980426/",
+    "alt": "Close-up of the word OUTRO stamped on orange paper, highlighting typography and design.",
+    "width": 6000,
+    "height": 4000
+  },
+  "boka-kotorska-2.jpg": {
+    "query": "Bay of Kotor Montenegro",
+    "photographer": "Philipp Schwarz",
+    "photographerUrl": "https://www.pexels.com/@philipp-schwarz-469323741",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-panorama-of-kotor-bay-with-cruise-ships-19451741/",
+    "alt": "Scenic panorama of Kotor Bay with cruise ships and historic town surrounded by mountains.",
+    "width": 6000,
+    "height": 4000
+  },
+  "boka-kotorska-3.jpg": {
+    "query": "Bay of Kotor Montenegro",
+    "photographer": "Muamer Ramovic",
+    "photographerUrl": "https://www.pexels.com/@montenegrian",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-shot-of-a-landscape-7510133/",
+    "alt": "Breathtaking aerial view of the stunning Bay of Kotor surrounded by rugged mountains in Montenegro.",
+    "width": 6000,
+    "height": 4000
+  },
+  "kotor-old-town-1.jpg": {
+    "query": "Kotor old town Montenegro",
+    "photographer": "Muamer Ramovic",
+    "photographerUrl": "https://www.pexels.com/@montenegrian",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-shot-of-a-landscape-7510133/",
+    "alt": "Breathtaking aerial view of the stunning Bay of Kotor surrounded by rugged mountains in Montenegro.",
+    "width": 6000,
+    "height": 4000
+  },
+  "kotor-old-town-2.jpg": {
+    "query": "Kotor old town Montenegro",
+    "photographer": "Mikołaj Kołodziejczyk",
+    "photographerUrl": "https://www.pexels.com/@mikolaj-kolodziejczyk-2377168",
+    "pexelsUrl": "https://www.pexels.com/photo/a-view-of-the-old-town-in-lublin-poland-4106605/",
+    "alt": "Aerial view capturing the historic charm and architecture of Lublin's Old Town in Poland.",
+    "width": 6000,
+    "height": 4000
+  },
+  "montenegro-beach-1.jpg": {
+    "query": "Montenegro beach turquoise",
+    "photographer": "Kateryna Tartachna",
+    "photographerUrl": "https://www.pexels.com/@kateryna-tartachna-398669386",
+    "pexelsUrl": "https://www.pexels.com/photo/tranquil-beach-shoreline-with-clear-blue-water-36536158/",
+    "alt": "A serene beach scene with gentle waves meeting the sandy shore, perfect for relaxation themes.",
+    "width": 6000,
+    "height": 4000
+  },
+  "montenegro-beach-2.jpg": {
+    "query": "Montenegro beach turquoise",
+    "photographer": "Marian Florinel Condruz",
+    "photographerUrl": "https://www.pexels.com/@gottapics",
+    "pexelsUrl": "https://www.pexels.com/photo/three-brown-parasols-on-seashore-1190118/",
+    "alt": "A serene beach scene with thatched huts, clear turquoise waters, and a tranquil summer sky.",
+    "width": 6000,
+    "height": 4000
+  },
+  "montenegro-beach-3.jpg": {
+    "query": "Montenegro beach turquoise",
+    "photographer": "Alexander Nadrilyanski",
+    "photographerUrl": "https://www.pexels.com/@aleksandar069",
+    "pexelsUrl": "https://www.pexels.com/photo/old-town-of-budva-near-sandy-beach-and-sea-4488998/",
+    "alt": "Aged church and building facades near sandy shore and ocean with dock behind ridge under cloudy sky",
+    "width": 6000,
+    "height": 4000
+  },
+  "montenegro-beach-4.jpg": {
+    "query": "Montenegro beach turquoise",
+    "photographer": "Ollie Craig",
+    "photographerUrl": "https://www.pexels.com/@olliecraig1",
+    "pexelsUrl": "https://www.pexels.com/photo/tropical-coastline-with-lush-green-trees-and-turquoise-sea-in-sunlight-5022263/",
+    "alt": "Calm turquoise waters and a vibrant coastline captured from above in Split, Croatia.",
+    "width": 8000,
+    "height": 6000
+  },
+  "montenegro-coast-1.jpg": {
+    "query": "Montenegro coast adriatic sunny",
+    "photographer": "Alexander Nadrilyanski",
+    "photographerUrl": "https://www.pexels.com/@aleksandar069",
+    "pexelsUrl": "https://www.pexels.com/photo/sveti-nikola-island-in-montenegro-7588149/",
+    "alt": "A breathtaking view of Sveti Nikola Island with mountains and ocean in Montenegro.",
+    "width": 6032,
+    "height": 4013
+  },
+  "montenegro-coast-2.jpg": {
+    "query": "Montenegro coast adriatic sunny",
+    "photographer": "jade xie",
+    "photographerUrl": "https://www.pexels.com/@jade-xie-2153337300",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-aerial-view-of-kotor-bay-montenegro-36039424/",
+    "alt": "Stunning aerial photo of Kotor Bay with mountains and a cruise ship on a sunny day.",
+    "width": 6240,
+    "height": 4160
+  },
+  "montenegro-coast-3.jpg": {
+    "query": "Montenegro coast adriatic sunny",
+    "photographer": "Muamer Ramovic",
+    "photographerUrl": "https://www.pexels.com/@montenegrian",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-shot-of-a-landscape-7510133/",
+    "alt": "Breathtaking aerial view of the stunning Bay of Kotor surrounded by rugged mountains in Montenegro.",
+    "width": 6000,
+    "height": 4000
+  },
+  "restaurant-mediterranean-1.jpg": {
+    "query": "Mediterranean seafood restaurant outdoor",
+    "photographer": "FOX ^.ᆽ.^= ∫",
+    "photographerUrl": "https://www.pexels.com/@fox-58267",
+    "pexelsUrl": "https://www.pexels.com/photo/cooked-shellfish-on-the-plate-6378645/",
+    "alt": "A vibrant close-up of fresh cockles served on a decorative blue and white plate.",
+    "width": 6000,
+    "height": 4000
+  },
+  "restaurant-mediterranean-2.jpg": {
+    "query": "Mediterranean seafood restaurant outdoor",
+    "photographer": "Jaradah Fish",
+    "photographerUrl": "https://www.pexels.com/@jaradahfish",
+    "pexelsUrl": "https://www.pexels.com/photo/cooked-crab-on-plate-3640445/",
+    "alt": "A mouthwatering presentation of cooked crabs served on a plate, ideal for seafood lovers.",
+    "width": 6000,
+    "height": 4000
+  },
+  "restaurant-mediterranean-3.jpg": {
+    "query": "Mediterranean seafood restaurant outdoor",
+    "photographer": "FOX ^.ᆽ.^= ∫",
+    "photographerUrl": "https://www.pexels.com/@fox-58267",
+    "pexelsUrl": "https://www.pexels.com/photo/delicious-cooked-prawns-on-a-plate-7715478/",
+    "alt": "Delicious grilled prawns served on a decorative plate, perfect for seafood lovers.",
+    "width": 6000,
+    "height": 4000
+  },
+  "cafe-outdoor-1.jpg": {
+    "query": "european cafe outdoor sunny",
+    "photographer": "UMUT   🆁🅰🆆",
+    "photographerUrl": "https://www.pexels.com/@umudicreative",
+    "pexelsUrl": "https://www.pexels.com/photo/charming-outdoor-cafe-in-sunny-urban-setting-36484105/",
+    "alt": "Cozy outdoor seating at Gooder Coffee on a sunny day in a lively urban area.",
+    "width": 7426,
+    "height": 4951
+  },
+  "cafe-outdoor-2.jpg": {
+    "query": "european cafe outdoor sunny",
+    "photographer": "Kampus Production",
+    "photographerUrl": "https://www.pexels.com/@kampus",
+    "pexelsUrl": "https://www.pexels.com/photo/a-couple-sitting-at-the-table-6181110/",
+    "alt": "A couple enjoys coffee at a terrace cafe with a scenic view of Lisbon's rooftops and ocean.",
+    "width": 7360,
+    "height": 4912
+  },
+  "nightlife-bar-1.jpg": {
+    "query": "cocktail bar evening mediterranean",
+    "photographer": "Szymon Shields",
+    "photographerUrl": "https://www.pexels.com/@szymon-shields-1503561",
+    "pexelsUrl": "https://www.pexels.com/photo/elegant-cocktail-close-up-in-tokyo-bar-setting-36189461/",
+    "alt": "Close-up shot of a cocktail glass with a layered drink in a dimly lit Tokyo bar.",
+    "width": 6000,
+    "height": 4000
+  },
+  "nightlife-bar-2.jpg": {
+    "query": "cocktail bar evening mediterranean",
+    "photographer": "Antoni Shkraba Studio",
+    "photographerUrl": "https://www.pexels.com/@shkrabaanthony",
+    "pexelsUrl": "https://www.pexels.com/photo/photo-of-a-bartender-in-a-bar-4485379/",
+    "alt": "Professional bartender in a stylish lounge bar serving a creamy cocktail with confidence and charisma.",
+    "width": 6000,
+    "height": 4000
+  },
+  "church-old-town-1.jpg": {
+    "query": "mediterranean stone church old town",
+    "photographer": "Marian Florinel Condruz",
+    "photographerUrl": "https://www.pexels.com/@gottapics",
+    "pexelsUrl": "https://www.pexels.com/photo/church-tower-in-city-with-sea-bay-7201437/",
+    "alt": "A breathtaking view of Dubrovnik's historic old town with its iconic tower and marina.",
+    "width": 6000,
+    "height": 4000
+  },
+  "church-old-town-2.jpg": {
+    "query": "mediterranean stone church old town",
+    "photographer": "Ender Vatan",
+    "photographerUrl": "https://www.pexels.com/@endervatan",
+    "pexelsUrl": "https://www.pexels.com/photo/a-brown-concrete-building-beside-a-lake-5340094/",
+    "alt": "Picturesque view of Budva Old Town with its iconic medieval architecture against a serene coastal backdrop.",
+    "width": 6000,
+    "height": 4501
+  },
+  "church-old-town-3.jpg": {
+    "query": "mediterranean stone church old town",
+    "photographer": "chris clark",
+    "photographerUrl": "https://www.pexels.com/@chris-clark-1933184",
+    "pexelsUrl": "https://www.pexels.com/photo/facade-of-old-church-near-green-trees-and-plants-5720423/",
+    "alt": "Stunning view of a historic church with a red dome at sunset in Cyprus, surrounded by lush greenery.",
+    "width": 6000,
+    "height": 4000
+  },
+  "monastery-1.jpg": {
+    "query": "monastery mediterranean",
+    "photographer": "Brian  de Karma",
+    "photographerUrl": "https://www.pexels.com/@brian-de-karma-806590",
+    "pexelsUrl": "https://www.pexels.com/photo/gray-concrete-building-during-sunset-1690364/",
+    "alt": "Silhouette of a monastery bell tower during a stunning sunset with mountain views.",
+    "width": 6000,
+    "height": 4000
+  },
+  "monastery-2.jpg": {
+    "query": "monastery mediterranean",
+    "photographer": "Gotta Be Worth It",
+    "photographerUrl": "https://www.pexels.com/@myersmc16",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-photo-of-mountain-919146/",
+    "alt": "Stunning landscape of Montserrat Mountain and monastery in Catalonia, Spain, under a clear blue sky.",
+    "width": 6016,
+    "height": 4000
+  },
+  "viewpoint-bay-1.jpg": {
+    "query": "mediterranean bay viewpoint panorama sunny",
+    "photographer": "Roman S",
+    "photographerUrl": "https://www.pexels.com/@roman-s-664858161",
+    "pexelsUrl": "https://www.pexels.com/photo/beautiful-montenegrin-coastline-and-mountain-view-36325130/",
+    "alt": "Scenic view of Montenegro's coastline with lush autumn foliage and distant sea.",
+    "width": 6016,
+    "height": 4000
+  },
+  "viewpoint-bay-2.jpg": {
+    "query": "mediterranean bay viewpoint panorama sunny",
+    "photographer": "Alaa Kamonah",
+    "photographerUrl": "https://www.pexels.com/@alaakamonah",
+    "pexelsUrl": "https://www.pexels.com/photo/body-of-water-and-rock-formations-922509/",
+    "alt": "Breathtaking view of Antalya's rocky coastline and blue waters under a clear sky.",
+    "width": 10917,
+    "height": 3332
+  },
+  "viewpoint-bay-3.jpg": {
+    "query": "mediterranean bay viewpoint panorama sunny",
+    "photographer": "Alexey Sinelnikov",
+    "photographerUrl": "https://www.pexels.com/@alexey-sinelnikov",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-photography-of-a-lake-2960211/",
+    "alt": "Breathtaking view of azure waters and lush green hills under a clear blue sky.",
+    "width": 6016,
+    "height": 4016
+  },
+  "market-1.jpg": {
+    "query": "mediterranean farmers market outdoor",
+    "photographer": "Jo Kassis",
+    "photographerUrl": "https://www.pexels.com/@jokassis",
+    "pexelsUrl": "https://www.pexels.com/photo/close-up-photo-of-tomatoes-4633297/",
+    "alt": "Bright red cherry tomatoes on display at an outdoor market in Barcelona, Spain.",
+    "width": 6000,
+    "height": 4000
+  },
+  "market-2.jpg": {
+    "query": "mediterranean farmers market outdoor",
+    "photographer": "AS Photography",
+    "photographerUrl": "https://www.pexels.com/@asphotography",
+    "pexelsUrl": "https://www.pexels.com/photo/vegetables-stall-868110/",
+    "alt": "Colorful assortment of fresh fruits and vegetables in a bustling outdoor market scene.",
+    "width": 6016,
+    "height": 4016
+  },
+  "promenade-1.jpg": {
+    "query": "mediterranean coastal promenade sunset",
+    "photographer": "Mediha Ekici",
+    "photographerUrl": "https://www.pexels.com/@mediha-ekici-2150926769",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-sunset-over-izmir-s-coastal-promenade-36366925/",
+    "alt": "Serene sunset view over Izmir promenade with ships and people silhouetted against the sea.",
+    "width": 7589,
+    "height": 5059
+  },
+  "promenade-2.jpg": {
+    "query": "mediterranean coastal promenade sunset",
+    "photographer": "Maurizio Fecchio",
+    "photographerUrl": "https://www.pexels.com/@maurizio-fecchio-2149982693",
+    "pexelsUrl": "https://www.pexels.com/photo/church-at-sunset-in-caorle-italy-36094596/",
+    "alt": "Scenic view of a church and bell tower in Caorle, Italy at sunset along the waterfront.",
+    "width": 6000,
+    "height": 4000
+  },
+  "festival-1.jpg": {
+    "query": "outdoor festival lights mediterranean",
+    "photographer": "Magda Ehlers",
+    "photographerUrl": "https://www.pexels.com/@magda-ehlers-pexels",
+    "pexelsUrl": "https://www.pexels.com/photo/festive-outdoor-restaurant-setup-in-italy-35989673/",
+    "alt": "A beautifully decorated Italian restaurant entrance with Christmas decorations and red tablecloths.",
+    "width": 7525,
+    "height": 4466
+  },
+  "festival-2.jpg": {
+    "query": "outdoor festival lights mediterranean",
+    "photographer": "Mehedi Hasan",
+    "photographerUrl": "https://www.pexels.com/@mehedi",
+    "pexelsUrl": "https://www.pexels.com/photo/festive-outdoor-night-lights-with-decorations-36651887/",
+    "alt": "",
+    "width": 6000,
+    "height": 4000
+  },
+  "family-beach-1.jpg": {
+    "query": "family beach mediterranean sunny",
+    "photographer": "Engin Akyurt",
+    "photographerUrl": "https://www.pexels.com/@enginakyurt",
+    "pexelsUrl": "https://www.pexels.com/photo/people-enjoying-the-beach-2880505/",
+    "alt": "Crowded Antalya beach with sunbathers, umbrellas, and turquoise water, ideal summer destination.",
+    "width": 7712,
+    "height": 5144
+  },
+  "family-beach-2.jpg": {
+    "query": "family beach mediterranean sunny",
+    "photographer": "Jo Kassis",
+    "photographerUrl": "https://www.pexels.com/@jokassis",
+    "pexelsUrl": "https://www.pexels.com/photo/people-at-the-beach-during-summer-5339544/",
+    "alt": "Aerial view of people enjoying a sunny day at the beach in Faro, Portugal.",
+    "width": 6000,
+    "height": 4000
+  },
+  "fort-spanjola.jpg": {
+    "source": "Wikimedia Commons",
+    "sourceFile": "2024-02-04_Fortress_Spanjola,_Herceg_Novi_3.jpg",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Alexkom000\" title=\"User:Alexkom000\">Alexkom000</a>",
+    "license": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2024-02-04_Fortress_Spanjola%2C_Herceg_Novi_3.jpg"
+  },
+  "sahat-kula.jpg": {
+    "source": "Wikimedia Commons",
+    "sourceFile": "HercegNovi,_hodinova_vez_z_18._stol.jpg",
+    "artist": "Martin Brož",
+    "license": "CC BY 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:HercegNovi%2C_hodinova_vez_z_18._stol.jpg"
+  },
+  "zanjice-beach.jpg": {
+    "source": "Wikimedia Commons",
+    "sourceFile": "Žanjice_beach_in_Montenegro.jpg",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:BuhaM\" title=\"User:BuhaM\">Milica Buha</a>",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:%C5%BDanjice_beach_in_Montenegro.jpg"
+  },
+  "miriste-beach.jpg": {
+    "source": "Wikimedia Commons",
+    "sourceFile": "Miriste.jpg",
+    "artist": "<a href=\"https://en.wikipedia.org/wiki/User:Igycg\" class=\"extiw\" title=\"wikipedia:User:Igycg\">Igycg</a> at <a href=\"https://en.wikipedia.org/wiki/\" class=\"extiw\" title=\"wikipedia:\">English Wikipedia</a>",
+    "license": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Miriste.jpg"
+  },
+  "herceg-novi-sunset.jpg": {
+    "source": "Wikimedia Commons",
+    "sourceFile": "Herceg_Novi_Sunset.JPG",
+    "artist": "<a href=\"https://en.wikipedia.org/wiki/User:Zlatko\" class=\"extiw\" title=\"en:User:Zlatko\">Zlatko</a> at <a class=\"external text\" href=\"https://en.wikipedia.org\">en.wikipedia</a>",
+    "license": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Herceg_Novi_Sunset.JPG"
+  },
+  "perla-beach.jpg": {
+    "source": "Pexels",
+    "photographer": "Ender Vatan",
+    "photographerUrl": "https://www.pexels.com/@endervatan",
+    "pexelsUrl": "https://www.pexels.com/photo/a-brown-concrete-building-beside-a-lake-5340094/",
+    "alt": "Picturesque view of Budva Old Town with its iconic medieval architecture against a serene coastal backdrop.",
+    "searchQuery": "Montenegro adriatic beach pebble",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "kalajza-beach.jpg": {
+    "source": "Pexels",
+    "photographer": "Stock Paintings",
+    "photographerUrl": "https://www.pexels.com/@digitalpaintings",
+    "pexelsUrl": "https://www.pexels.com/photo/brown-cliff-1046487/",
+    "alt": "Serene rocky seashore with clear turquoise water in Budva, Montenegro.",
+    "searchQuery": "Montenegro rocky beach blue water",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "rafaello-beach.jpg": {
+    "source": "Pexels",
+    "photographer": "Alexander Nadrilyanski",
+    "photographerUrl": "https://www.pexels.com/@aleksandar069",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-view-of-beach-beside-sea-5125371/",
+    "alt": "Stunning aerial view of Bar Beach, Montenegro showcasing vibrant summer coastlines and palm-lined roads.",
+    "searchQuery": "Montenegro beach turquoise",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "njivice-beach.jpg": {
+    "source": "Pexels",
+    "photographer": "Valeriia Miller",
+    "photographerUrl": "https://www.pexels.com/@valeriiamiller",
+    "pexelsUrl": "https://www.pexels.com/photo/green-trees-near-body-of-water-2561367/",
+    "alt": "Breathtaking view of a serene beach in Montenegro with mountains and lush greenery.",
+    "searchQuery": "Montenegro small beach",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "gospa-od-skrpjela.jpg": {
+    "source": "Pexels",
+    "photographer": "Julien Goettelmann",
+    "photographerUrl": "https://www.pexels.com/@julien-goettelmann-44396125",
+    "pexelsUrl": "https://www.pexels.com/photo/our-lady-of-the-rocks-in-montenegro-27205603/",
+    "alt": "Stunning aerial view of Saint George Island in Kotor Bay, Montenegro with blue waters.",
+    "searchQuery": "Our Lady of the Rocks Perast Montenegro",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "plava-spilja.jpg": {
+    "source": "Pexels",
+    "photographer": "Dimitris Mourousiadis",
+    "photographerUrl": "https://www.pexels.com/@dimi",
+    "pexelsUrl": "https://www.pexels.com/photo/brown-rock-formation-with-clear-blue-water-6477498/",
+    "alt": "Explore the stunning Blue Caves with clear turquoise waters and unique rock formations in Zakinthos, Greece.",
+    "searchQuery": "blue cave Montenegro",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "rimski-mozaici.jpg": {
+    "source": "Pexels",
+    "photographer": "Polina ⠀",
+    "photographerUrl": "https://www.pexels.com/@polina-kovaleva",
+    "pexelsUrl": "https://www.pexels.com/photo/close-up-shot-of-a-stone-wall-6788313/",
+    "alt": "Intricate stone mosaic pattern with abstract design captured in close-up view.",
+    "searchQuery": "Roman mosaic floor ancient",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "kotor-cable-car-view.jpg": {
+    "source": "Pexels",
+    "photographer": "Muamer Ramovic",
+    "photographerUrl": "https://www.pexels.com/@montenegrian",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-shot-of-a-landscape-7510133/",
+    "alt": "Breathtaking aerial view of the stunning Bay of Kotor surrounded by rugged mountains in Montenegro.",
+    "searchQuery": "Kotor bay view aerial Montenegro",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "tri-lipe.jpg": {
+    "source": "Pexels",
+    "photographer": "Khalil Sallem",
+    "photographerUrl": "https://www.pexels.com/@khalil-sallem-2920200",
+    "pexelsUrl": "https://www.pexels.com/photo/photograph-of-empty-chairs-and-tables-near-a-body-of-water-5358330/",
+    "alt": "Outdoor restaurant terrace with a stunning view of a lake and mountains in Nabeul, Tunisia.",
+    "searchQuery": "Mediterranean restaurant terrace outdoor",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "gradska-kafana.jpg": {
+    "source": "Pexels",
+    "photographer": "zeynep",
+    "photographerUrl": "https://www.pexels.com/@zeynep-264150158",
+    "pexelsUrl": "https://www.pexels.com/photo/charming-cafe-street-corner-in-sakarya-turkiye-36234126/",
+    "alt": "Cozy street-side cafe on a sunny day in Sakarya, Türkiye, with traditional architecture.",
+    "searchQuery": "European town cafe restaurant",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "belveder-restoran.jpg": {
+    "source": "Pexels",
+    "photographer": "wewe yang",
+    "photographerUrl": "https://www.pexels.com/@wewe-yang-2383099",
+    "pexelsUrl": "https://www.pexels.com/photo/cloudscape-and-restaurant-tables-with-candles-by-the-sea-at-dusk-5805475/",
+    "alt": "Seaside dining setup with candles at sunset, ideal for a romantic evening.",
+    "searchQuery": "seaside restaurant view Montenegro",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "portofino-restoran.jpg": {
+    "source": "Pexels",
+    "photographer": "VH S",
+    "photographerUrl": "https://www.pexels.com/@vlah",
+    "pexelsUrl": "https://www.pexels.com/photo/salad-3084550/",
+    "alt": "Close-up of a delicious Italian salad with cherry tomatoes, cheese shavings, and fresh greens served at a restaurant.",
+    "searchQuery": "Italian restaurant Mediterranean",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "konoba-aragosta.jpg": {
+    "source": "Pexels",
+    "photographer": "ROSA CASASUS",
+    "photographerUrl": "https://www.pexels.com/@rosa-casasus-194763033",
+    "pexelsUrl": "https://www.pexels.com/photo/delicious-seafood-platter-with-ceviche-36317351/",
+    "alt": "A vibrant seafood platter featuring fried calamari, ceviche, and a crab claw.",
+    "searchQuery": "seafood restaurant traditional stone",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "feral-restoran.jpg": {
+    "source": "Pexels",
+    "photographer": "Furkan Tumer",
+    "photographerUrl": "https://www.pexels.com/@furkan-tumer-1560109",
+    "pexelsUrl": "https://www.pexels.com/photo/a-yacht-table-setting-on-the-sea-7766408/",
+    "alt": "Elegant dining setup on a yacht overlooking Antalya's scenic coast in Türkiye.",
+    "searchQuery": "seaside dining Montenegro coast",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "fabrika-coffee.jpg": {
+    "source": "Pexels",
+    "photographer": "cottonbro studio",
+    "photographerUrl": "https://www.pexels.com/@cottonbro",
+    "pexelsUrl": "https://www.pexels.com/photo/man-in-white-t-shirt-pouring-coffee-on-black-coffee-maker-4790063/",
+    "alt": "Barista in modern cafe holding coffee cup beside espresso machine, showcasing coffee culture.",
+    "searchQuery": "specialty coffee shop modern",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "koffein-cafe.jpg": {
+    "source": "Pexels",
+    "photographer": "cottonbro studio",
+    "photographerUrl": "https://www.pexels.com/@cottonbro",
+    "pexelsUrl": "https://www.pexels.com/photo/white-disposable-cup-on-black-and-silver-coffee-maker-4792698/",
+    "alt": "Close-up of espresso being poured into a ceramic cup from a Sanremo machine at a café.",
+    "searchQuery": "European cafe espresso",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "belavista-cafe.jpg": {
+    "source": "Pexels",
+    "photographer": "Alexander Nadrilyanski",
+    "photographerUrl": "https://www.pexels.com/@aleksandar069",
+    "pexelsUrl": "https://www.pexels.com/photo/street-cafe-located-near-waving-sea-4488999/",
+    "alt": "An idyllic terrace by the Adriatic Sea with empty tables and mountain views, perfect for a peaceful retreat.",
+    "searchQuery": "sea view cafe terrace",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "nautica-cafe.jpg": {
+    "source": "Pexels",
+    "photographer": "Lukas Blazek",
+    "photographerUrl": "https://www.pexels.com/@goumbik",
+    "pexelsUrl": "https://www.pexels.com/photo/yacht-on-body-of-water-296237/",
+    "alt": "A picturesque marina with boats and yachts reflecting beautifully in the calm blue waters.",
+    "searchQuery": "nautical cafe marina",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "la-bamba.jpg": {
+    "source": "Pexels",
+    "photographer": "Alexander Nadrilyanski",
+    "photographerUrl": "https://www.pexels.com/@aleksandar069",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-view-of-beach-beside-sea-5125371/",
+    "alt": "Stunning aerial view of Bar Beach, Montenegro showcasing vibrant summer coastlines and palm-lined roads.",
+    "searchQuery": "Montenegro nightlife bar beach",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "tondo-bar.jpg": {
+    "source": "Pexels",
+    "photographer": "Antoni Shkraba Studio",
+    "photographerUrl": "https://www.pexels.com/@shkrabaanthony",
+    "pexelsUrl": "https://www.pexels.com/photo/photo-of-a-bartender-in-a-bar-4485379/",
+    "alt": "Professional bartender in a stylish lounge bar serving a creamy cocktail with confidence and charisma.",
+    "searchQuery": "Mediterranean cocktail bar night",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "skuribanda.jpg": {
+    "source": "Pexels",
+    "photographer": "Amelia Hallsworth",
+    "photographerUrl": "https://www.pexels.com/@amelia-hallsworth",
+    "pexelsUrl": "https://www.pexels.com/photo/empty-night-bar-counter-5461573/",
+    "alt": "A stylish and modern bar interior featuring a rustic wooden counter and ambient lighting, creating a unique nightlife atmosphere.",
+    "searchQuery": "outdoor bar night summer",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "peoples-beach-bar.jpg": {
+    "source": "Pexels",
+    "photographer": "Engin Akyurt",
+    "photographerUrl": "https://www.pexels.com/@enginakyurt",
+    "pexelsUrl": "https://www.pexels.com/photo/assorted-cocktails-2531184/",
+    "alt": "Colorful cocktails with garnishes at a sunset beach bar, perfect for tropical vacations.",
+    "searchQuery": "beach bar sunset party",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "festival-mimoze.jpg": {
+    "source": "Pexels",
+    "photographer": "Cup of  Couple",
+    "photographerUrl": "https://www.pexels.com/@cup-of-couple",
+    "pexelsUrl": "https://www.pexels.com/photo/beautiful-woman-looking-up-holding-yellow-flowers-6635053/",
+    "alt": "Woman looks up holding vibrant yellow flowers indoors with a minimalist background.",
+    "searchQuery": "mimosa flower yellow festival",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "film-festival.jpg": {
+    "source": "Pexels",
+    "photographer": "Son Tung Tran",
+    "photographerUrl": "https://www.pexels.com/@son-tung-tran-17375059",
+    "pexelsUrl": "https://www.pexels.com/photo/people-sitting-on-green-grass-field-in-an-outdoor-cinema-6521574/",
+    "alt": "People enjoying an outdoor movie night under the sky in a scenic setting surrounded by trees.",
+    "searchQuery": "open air cinema outdoor film",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "boka-noc.jpg": {
+    "source": "Pexels",
+    "photographer": "Richard L",
+    "photographerUrl": "https://www.pexels.com/@richard-l-2150581203",
+    "pexelsUrl": "https://www.pexels.com/photo/spectacular-fireworks-display-over-city-skyline-36364503/",
+    "alt": "Stunning fireworks light up the night sky over a vibrant cityscape, capturing the essence of celebration.",
+    "searchQuery": "boat night celebration bay fireworks",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "sunceane-skale.jpg": {
+    "source": "Pexels",
+    "photographer": "Thibault Trillet",
+    "photographerUrl": "https://www.pexels.com/@thibault-trillet-44912",
+    "pexelsUrl": "https://www.pexels.com/photo/photo-of-concert-band-during-night-time-167605/",
+    "alt": "Dynamic live concert with band on stage, lighting effects, and enthusiastic crowd at night.",
+    "searchQuery": "outdoor music concert stage",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "zelena-pijaca.jpg": {
+    "source": "Pexels",
+    "photographer": "Jo Kassis",
+    "photographerUrl": "https://www.pexels.com/@jokassis",
+    "pexelsUrl": "https://www.pexels.com/photo/photo-of-assorted-vegetables-4633292/",
+    "alt": "A bustling farmers market in Barcelona with vendors selling fresh vegetables in a vibrant street setting.",
+    "searchQuery": "farmers market vegetables Mediterranean",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "stari-grad-suveniri.jpg": {
+    "source": "Pexels",
+    "photographer": "Cátia Matos",
+    "photographerUrl": "https://www.pexels.com/@catiamatos",
+    "pexelsUrl": "https://www.pexels.com/photo/man-selling-store-item-984869/",
+    "alt": "Charming street market in Chania, Greece, with vibrant textiles and local crafts on display.",
+    "searchQuery": "souvenir shop old town",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "hdi-centar.jpg": {
+    "source": "Pexels",
+    "photographer": "Pixabay",
+    "photographerUrl": "https://www.pexels.com/@pixabay",
+    "pexelsUrl": "https://www.pexels.com/photo/mall-of-berlin-264502/",
+    "alt": "Explore the sleek and multi-level design of Mall of Berlin, showcasing modern architecture and shoppers.",
+    "searchQuery": "shopping center modern",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "tajno-brdo.jpg": {
+    "source": "Pexels",
+    "photographer": "Nikola",
+    "photographerUrl": "https://www.pexels.com/@nikola-2159520909",
+    "pexelsUrl": "https://www.pexels.com/photo/tranquil-reflections-of-kotor-bay-in-montenegro-36107982/",
+    "alt": "Stunning view of Kotor Bay with reflections of mountains under a clear blue sky.",
+    "searchQuery": "bay of Kotor viewpoint panorama",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "herceg-novi-walkway.jpg": {
+    "source": "Pexels",
+    "photographer": "Cátia Matos",
+    "photographerUrl": "https://www.pexels.com/@catiamatos",
+    "pexelsUrl": "https://www.pexels.com/photo/beige-concrete-bridge-balustrade-1061559/",
+    "alt": "Elegant pergola overlooking the Atlantic Ocean in Porto, Portugal, ideal for travel inspiration.",
+    "searchQuery": "Mediterranean stone walkway coastal promenade",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "kotor-old-town-view.jpg": {
+    "source": "Pexels",
+    "photographer": "ROMAN ODINTSOV",
+    "photographerUrl": "https://www.pexels.com/@roman-odintsov",
+    "pexelsUrl": "https://www.pexels.com/photo/alley-between-old-buidlings-5667841/",
+    "alt": "Picturesque cobblestone alley in historic Kotor, Montenegro, capturing timeless old town charm.",
+    "searchQuery": "Kotor old town Montenegro",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "bay-of-kotor-panorama.jpg": {
+    "source": "Pexels",
+    "photographer": "Muamer Ramovic",
+    "photographerUrl": "https://www.pexels.com/@montenegrian",
+    "pexelsUrl": "https://www.pexels.com/photo/aerial-shot-of-a-landscape-7510133/",
+    "alt": "Breathtaking aerial view of the stunning Bay of Kotor surrounded by rugged mountains in Montenegro.",
+    "searchQuery": "Bay of Kotor panoramic view",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "igalo-trail.jpg": {
+    "source": "Pexels",
+    "photographer": "x360o",
+    "photographerUrl": "https://www.pexels.com/@x360o-2158367555",
+    "pexelsUrl": "https://www.pexels.com/photo/scenic-coastal-walkway-with-dog-in-nice-france-36015514/",
+    "alt": "A peaceful coastal walkway view with a dog and street lamp in Nice, France.",
+    "searchQuery": "Mediterranean seaside promenade walking path",
+    "license": "Pexels License (free for commercial use)"
+  },
+  "topla-area.jpg": {
+    "source": "Pexels",
+    "photographer": "thanhhoa tran",
+    "photographerUrl": "https://www.pexels.com/@thanhhoa-tran-640546",
+    "pexelsUrl": "https://www.pexels.com/photo/city-near-body-of-water-artwork-1498790/",
+    "alt": "A vibrant seaside town with a lively promenade, overlooking the ocean.",
+    "searchQuery": "Herceg Novi waterfront coastal",
+    "license": "Pexels License (free for commercial use)"
+  }
+}

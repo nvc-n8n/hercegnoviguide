@@ -19,7 +19,7 @@ type PlaceListItemProps = {
 };
 
 export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 0 }: PlaceListItemProps) => {
-  const thumbUri = getHeroImageUri(place.id, place.category, 200, 200);
+  const thumbUri = getHeroImageUri(place.id, place.category);
   const categoryColor = categoryByKey[place.category]?.color || colors.primary;
   const scale = useSharedValue(1);
 
@@ -47,7 +47,7 @@ export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 
         onPressOut={onPressOut}
         style={({ pressed }) => [styles.mainArea, pressed && styles.pressed]}>
         {thumbUri ? (
-          <Image source={{ uri: thumbUri }} style={styles.thumb} contentFit="cover" transition={200} />
+          <Image source={thumbUri} style={styles.thumb} contentFit="cover" transition={200} />
         ) : (
           <View style={styles.thumbFallback}>
             <Ionicons color={colors.primary} name="location-outline" size={20} />

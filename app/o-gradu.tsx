@@ -10,10 +10,10 @@ import { AppText } from '@/src/components/AppText';
 import { Screen } from '@/src/components/Screen';
 import { colors, radii, spacing } from '@/src/theme';
 
-const HN_HERO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg/1280px-2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg';
-const HN_PROMENADE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Herceg_Novi._Promenade_Pet_Danica_-_panoramio_%281%29.jpg/1280px-Herceg_Novi._Promenade_Pet_Danica_-_panoramio_%281%29.jpg';
-const HN_OLD_CITY = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Herceg_Novi_-_old_city.JPG/1280px-Herceg_Novi_-_old_city.JPG';
-const HN_FORTE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/2024-02-04_Forte_Mare%2C_Herceg_Novi.jpg/1280px-2024-02-04_Forte_Mare%2C_Herceg_Novi.jpg';
+const HN_HERO = require('../assets/photos/viewpoint-bay-1.jpg');
+const HN_PROMENADE = require('../assets/photos/promenade-1.jpg');
+const HN_OLD_CITY = require('../assets/photos/herceg-novi-old-town-1.jpg');
+const HN_FORTE = require('../assets/photos/herceg-novi-fortress-1.jpg');
 
 const sections = [
   {
@@ -55,7 +55,7 @@ export default function AboutCityScreen() {
       {/* Hero photo */}
       <View style={styles.heroWrap}>
         <Image
-          source={{ uri: HN_HERO }}
+          source={HN_HERO}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
           transition={400}
@@ -92,7 +92,7 @@ export default function AboutCityScreen() {
             {section.photo ? (
               <View style={styles.cardPhoto}>
                 <Image
-                  source={{ uri: section.photo }}
+                  source={section.photo}
                   style={StyleSheet.absoluteFill}
                   contentFit="cover"
                   transition={300}

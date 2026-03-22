@@ -61,7 +61,7 @@ export default function HomeScreen() {
       {/* ── HERO: Full-bleed, edge-to-edge ── */}
       <Animated.View entering={FadeInUp.duration(500).delay(50)} style={styles.heroWrap}>
         <Image
-          source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg/1280px-2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg' }}
+          source={require('../../assets/photos/viewpoint-bay-1.jpg')}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
           transition={500}
@@ -111,7 +111,7 @@ export default function HomeScreen() {
               onPress={() => router.push(`/kategorija/${cat.key}` as never)}
               style={({ pressed }) => [styles.catCard, pressed && styles.catCardPressed]}>
               <Image
-                source={{ uri: categoryCarouselImages[cat.key] }}
+                source={categoryCarouselImages[cat.key]}
                 style={StyleSheet.absoluteFill}
                 contentFit="cover"
                 transition={500}
@@ -295,7 +295,7 @@ function MayorCard() {
           source={KATIC_PHOTO}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
-          contentPosition={{ x: 0.5, y: 0.1 }}
+          contentPosition={{ top: '10%', left: '50%' }}
           transition={400}
         />
         <LinearGradient
@@ -352,7 +352,7 @@ function MayorCard() {
 }
 
 function EditorialCard({ place, aspect, delay }: { place: Place; aspect: number; delay: number }) {
-  const imgUri = getHeroImageUri(place.id, place.category, 1000, 600);
+  const imgSource = getHeroImageUri(place.id, place.category);
   return (
     <Animated.View entering={FadeInUp.duration(400).delay(delay)}>
       <Pressable
@@ -360,8 +360,8 @@ function EditorialCard({ place, aspect, delay }: { place: Place; aspect: number;
         onPress={() => router.push(`/mjesto/${place.slug}` as never)}
         style={({ pressed }) => [pressed && styles.editorialPressed]}>
         <View style={[styles.editorialCard, { aspectRatio: aspect }]}>
-          {imgUri ? (
-            <Image source={{ uri: imgUri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
+          {imgSource ? (
+            <Image source={imgSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
           ) : null}
           <LinearGradient
             colors={['transparent', 'rgba(26,43,61,0.75)']}

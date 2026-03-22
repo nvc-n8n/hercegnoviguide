@@ -32,13 +32,13 @@ const slides = [
   },
   {
     key: 'navigate',
-    image: `${categoryFallbackImages.beaches}?w=1400&h=900&fit=crop&q=80`,
+    image: categoryFallbackImages.beaches,
     title: 'Od ideje do mape\nza sekunde',
     body: 'Dodirnite Uputstva na bilo kojem mjestu i navigacija se otvara odmah.',
   },
   {
     key: 'save',
-    image: `${categoryFallbackImages.nightlife}?w=1400&h=900&fit=crop&q=80`,
+    image: categoryFallbackImages.nightlife,
     title: 'Sačuvajte plan\nza savršen dan',
     body: 'Označite omiljene lokacije i napravite plan za jutro, popodne ili veče.',
   },
@@ -100,7 +100,7 @@ export default function OnboardingScreen() {
     return (
       <View style={styles.introRoot}>
         <Image
-          source={{ uri: categoryFallbackImages.viewpoints }}
+          source={categoryFallbackImages.viewpoints}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
           transition={800}
@@ -164,7 +164,7 @@ export default function OnboardingScreen() {
           }}>
           {slides.map((item) => (
             <View key={item.key} style={{ width: screenW, height: screenH }}>
-              <Image source={{ uri: item.image }} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
+              <Image source={item.image} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
               <LinearGradient
                 colors={['rgba(26,43,61,0.05)', 'rgba(26,43,61,0.78)']}
                 locations={[0.25, 1]}

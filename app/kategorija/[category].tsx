@@ -36,11 +36,8 @@ export default function CategoryScreen() {
     );
   }
 
-  // Build the heroUri — handle both Wikimedia and Unsplash
-  const rawHeroUri = categoryFallbackImages[category];
-  const heroUri = rawHeroUri?.includes('unsplash.com')
-    ? `${rawHeroUri}?w=1400&h=800&fit=crop&q=85`
-    : rawHeroUri;
+  // Category hero image (local asset)
+  const heroSource = categoryFallbackImages[category];
 
   // Build editorial layout: alternate between full-width and 2-col rows
   const layoutRows: Array<{ type: 'full'; place: Place } | { type: 'pair'; left: Place; right: Place }> = [];
@@ -61,7 +58,7 @@ export default function CategoryScreen() {
     <Screen>
       {/* ── HERO: Full-bleed, edge-to-edge ── */}
       <View style={styles.heroWrap}>
-        <Image source={{ uri: heroUri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={500} />
+        <Image source={heroSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={500} />
         <LinearGradient
           colors={['rgba(26,43,61,0.08)', 'rgba(26,43,61,0.75)']}
           locations={[0.2, 1]}
@@ -137,7 +134,7 @@ export default function CategoryScreen() {
 }
 
 function MasonryCard({ place, aspect, delay }: { place: Place & { distanceMeters?: number | null }; aspect: number; delay: number }) {
-  const imgUri = getHeroImageUri(place.id, place.category, 900, 600);
+  const imgSource = getHeroImageUri(place.id, place.category);
   return (
     <Animated.View entering={FadeInUp.duration(350).delay(delay)}>
       <Pressable
@@ -145,8 +142,8 @@ function MasonryCard({ place, aspect, delay }: { place: Place & { distanceMeters
         onPress={() => router.push(`/mjesto/${place.slug}` as never)}
         style={({ pressed }) => [pressed && styles.cardPressed]}>
         <View style={[styles.card, { aspectRatio: aspect }]}>
-          {imgUri ? (
-            <Image source={{ uri: imgUri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
+          {imgSource ? (
+            <Image source={imgSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
           ) : null}
           <LinearGradient
             colors={['transparent', 'rgba(26,43,61,0.7)']}

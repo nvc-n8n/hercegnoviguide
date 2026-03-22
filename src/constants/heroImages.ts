@@ -1,184 +1,254 @@
 /**
- * Real photos of actual Herceg Novi locations from Wikimedia Commons.
- * All images are CC-licensed. Unsplash CDN used only for generic categories.
+ * Herceg Novi Guide — Image Assets
+ *
+ * Place-specific photos from Wikimedia Commons (CC) and Pexels (free commercial use).
  */
 
-const wm = (path: string) => `https://upload.wikimedia.org/wikipedia/commons/${path}`;
-const wmThumb = (path: string, file: string, w = 1280) => `https://upload.wikimedia.org/wikipedia/commons/thumb/${path}/${w}px-${file}`;
-const unsplash = (id: string) => `https://images.unsplash.com/${id}`;
+import type { ImageSource } from 'expo-image';
 
-// ── REAL Herceg Novi location photos (Wikimedia Commons) ──────────
-const HN = {
-  // Panorama / Bay views
-  panorama: wmThumb('e/e1/Herceg_Novi.JPG', 'Herceg_Novi.JPG'),
-  oldCity: wmThumb('0/0f/Herceg_Novi_-_old_city.JPG', 'Herceg_Novi_-_old_city.JPG'),
-  primorje: wm('c/c8/Herceg_Novi_Primorje.JPG'),
-  gucalicaPeak: wmThumb('d/dc/2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg', '2024-02-04_A_view_from_Gru%C4%8Dalica_Peak%2C_Herceg_Novi_1.jpg'),
-  tajnoBrdo: wmThumb('e/e9/2024-02-04_A_vewi_from_Tajno_Brdo_fortress%2C_Herceg_Novi.jpg', '2024-02-04_A_vewi_from_Tajno_Brdo_fortress%2C_Herceg_Novi.jpg'),
+// ── Local photo assets ──────────────────────────────────────────────
 
-  // Forte Mare
-  forteMare: wmThumb('f/f0/2024-02-04_Forte_Mare%2C_Herceg_Novi.jpg', '2024-02-04_Forte_Mare%2C_Herceg_Novi.jpg'),
-  forteMare2: wmThumb('4/41/Herceg_-_Novi._Forte_Mare._%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D1%83%D1%8E_%D0%BA%D1%80%D0%B5%D0%BF%D0%BE%D1%81%D1%82%D1%8C._-_panoramio.jpg', 'Herceg_-_Novi._Forte_Mare._%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D1%83%D1%8E_%D0%BA%D1%80%D0%B5%D0%BF%D0%BE%D1%81%D1%82%D1%8C._-_panoramio.jpg'),
-  forteMareSeaFortress: wmThumb('0/05/%D0%93%D0%B5%D1%80%D1%86%D0%B5%D0%B3_-_%D0%9D%D0%BE%D0%B2%D0%B8%2C_%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BA%D1%80%D0%B5%D0%BF%D0%BE%D1%81%D1%82%D1%8C._-_panoramio.jpg', '%D0%93%D0%B5%D1%80%D1%86%D0%B5%D0%B3_-_%D0%9D%D0%BE%D0%B2%D0%B8%2C_%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BA%D1%80%D0%B5%D0%BF%D0%BE%D1%81%D1%82%D1%8C._-_panoramio.jpg'),
+const LOCAL = {
+  // ── Herceg Novi panoramas & town views ──
+  hnPanorama1: require('../../assets/photos/herceg-novi-panorama-1.jpg'),
+  hnPanorama2: require('../../assets/photos/herceg-novi-panorama-2.jpg'),
+  hnPanorama3: require('../../assets/photos/herceg-novi-panorama-3.jpg'),
+  hnPanoramaPexels1: require('../../assets/photos/hn-panorama-1.jpg'),
+  hnPanoramaPexels2: require('../../assets/photos/hn-panorama-2.jpg'),
+  hnFromSea: require('../../assets/photos/herceg-novi-from-sea.jpg'),
+  hnSunset: require('../../assets/photos/herceg-novi-sunset.jpg'),
+  hnWalkway: require('../../assets/photos/herceg-novi-walkway.jpg'),
+  hnOldTownGate: require('../../assets/photos/herceg-novi-old-town-gate.jpg'),
+  hnSquare: require('../../assets/photos/herceg-novi-square.jpg'),
 
-  // Zitadelle / Spanjola
-  zitadelle: wmThumb('8/8d/D01.30_Zitadelle_Herceg_Novi.jpg', 'D01.30_Zitadelle_Herceg_Novi.jpg'),
-  cityWalls: wmThumb('5/5a/Herceg_Novi_city_walls-05.JPG', 'Herceg_Novi_city_walls-05.JPG'),
+  // ── Herceg Novi old town (original) ──
+  hnOldTown1: require('../../assets/photos/herceg-novi-old-town-1.jpg'),
+  hnOldTown2: require('../../assets/photos/herceg-novi-old-town-2.jpg'),
 
-  // Savina Monastery
-  savina: wmThumb('b/bb/Bw306_-_Manastir_Savina.jpg', 'Bw306_-_Manastir_Savina.jpg'),
+  // ── Fortresses — actual place photos ──
+  forteMare: require('../../assets/photos/forte-mare.jpg'),
+  kanliKula: require('../../assets/photos/kanli-kula.jpg'),
+  fortSpanjola: require('../../assets/photos/fort-spanjola.jpg'),
+  sahatKula: require('../../assets/photos/sahat-kula.jpg'),
+  hnFortress1: require('../../assets/photos/herceg-novi-fortress-1.jpg'),
+  hnFortress2: require('../../assets/photos/herceg-novi-fortress-2.jpg'),
 
-  // Churches (color photos)
-  churchAscention: wmThumb('3/31/Herceg_Novi_-_Church_of_the_Ascention_Day.JPG', 'Herceg_Novi_-_Church_of_the_Ascention_Day.JPG'),
-  churchColor: wmThumb('9/90/Herceg_Novi%2C_2014-04-25_-_panoramio_%287%29.jpg', 'Herceg_Novi%2C_2014-04-25_-_panoramio_%287%29.jpg'),
-  oldTownChurch: wmThumb('7/7e/Herceg_-_Novi%2C_old_town_-_panoramio.jpg', 'Herceg_-_Novi%2C_old_town_-_panoramio.jpg'),
-  hercegNoviScene: wmThumb('9/97/05_-_Herceg_Novi.jpg', '05_-_Herceg_Novi.jpg'),
+  // ── Attractions — specific places ──
+  gradskiMuzej: require('../../assets/photos/gradski-muzej.jpg'),
+  kucaIvaAndrica: require('../../assets/photos/kuca-iva-andrica.jpg'),
+  spomenikTvrtku: require('../../assets/photos/spomenik-tvrtku.jpg'),
 
-  // Promenade
-  promenade: wmThumb('f/f6/Herceg_Novi._Promenade_Pet_Danica_-_panoramio_%281%29.jpg', 'Herceg_Novi._Promenade_Pet_Danica_-_panoramio_%281%29.jpg'),
-  panoramio10: wmThumb('2/2c/Herceg_Novi%2C_Montenegro_-_panoramio_%2810%29.jpg', 'Herceg_Novi%2C_Montenegro_-_panoramio_%2810%29.jpg'),
+  // ── Religious — actual places ──
+  manastirSavina: require('../../assets/photos/manastir-savina.jpg'),
+  crkvaSvMihaila: require('../../assets/photos/crkva-sv-mihaila.jpg'),
+  crkvaSvJeronima: require('../../assets/photos/crkva-sv-jeronima.jpg'),
+  churchOldTown1: require('../../assets/photos/church-old-town-1.jpg'),
+  churchOldTown2: require('../../assets/photos/church-old-town-2.jpg'),
+  churchOldTown3: require('../../assets/photos/church-old-town-3.jpg'),
+  monastery1: require('../../assets/photos/monastery-1.jpg'),
+  monastery2: require('../../assets/photos/monastery-2.jpg'),
+
+  // ── Beaches — specific places ──
+  zaloBeach: require('../../assets/photos/zalo-beach.jpg'),
+  lazureBeach: require('../../assets/photos/lazure-beach.jpg'),
+  savinaBeach: require('../../assets/photos/savina-beach.jpg'),
+  perlaBeach: require('../../assets/photos/perla-beach.jpg'),
+  kalajzaBeach: require('../../assets/photos/kalajza-beach.jpg'),
+  rafaelloBeach: require('../../assets/photos/rafaello-beach.jpg'),
+  toplaBeach: require('../../assets/photos/topla-beach.jpg'),
+  njiviceBeach: require('../../assets/photos/njivice-beach.jpg'),
+  zanjiceBeach: require('../../assets/photos/zanjice-beach.jpg'),
+  miristeBeach: require('../../assets/photos/miriste-beach.jpg'),
+  igaloBeach: require('../../assets/photos/igalo-beach.jpg'),
+  montenegroBeach1: require('../../assets/photos/montenegro-beach-1.jpg'),
+
+  // ── Coast ──
+  montenegroCoast1: require('../../assets/photos/montenegro-coast-1.jpg'),
+  montenegroCoast2: require('../../assets/photos/montenegro-coast-2.jpg'),
+  montenegroCoast3: require('../../assets/photos/montenegro-coast-3.jpg'),
+
+  // ── Restaurants — specific places ──
+  triLipe: require('../../assets/photos/tri-lipe.jpg'),
+  gradskaKafana: require('../../assets/photos/gradska-kafana.jpg'),
+  belveder: require('../../assets/photos/belveder-restoran.jpg'),
+  portofino: require('../../assets/photos/portofino-restoran.jpg'),
+  konobaAragosta: require('../../assets/photos/konoba-aragosta.jpg'),
+  feral: require('../../assets/photos/feral-restoran.jpg'),
+
+  // ── Cafes — specific places ──
+  fabrikaCoffee: require('../../assets/photos/fabrika-coffee.jpg'),
+  koffeinCafe: require('../../assets/photos/koffein-cafe.jpg'),
+  belavistaCafe: require('../../assets/photos/belavista-cafe.jpg'),
+  nauticaCafe: require('../../assets/photos/nautica-cafe.jpg'),
+
+  // ── Nightlife — specific places ──
+  laBamba: require('../../assets/photos/la-bamba.jpg'),
+  tondoBar: require('../../assets/photos/tondo-bar.jpg'),
+  skuribanda: require('../../assets/photos/skuribanda.jpg'),
+  peoplesBeachBar: require('../../assets/photos/peoples-beach-bar.jpg'),
+
+  // ── Nearby trips — specific places ──
+  plavaSpilja: require('../../assets/photos/plava-spilja.jpg'),
+  mamulaIsland: require('../../assets/photos/mamula-island.jpg'),
+  gospaOdSkrpjela: require('../../assets/photos/gospa-od-skrpjela.jpg'),
+  rimskiMozaici: require('../../assets/photos/rimski-mozaici.jpg'),
+  kotorCableCarView: require('../../assets/photos/kotor-cable-car-view.jpg'),
+  bokaKotorska1: require('../../assets/photos/boka-kotorska-1.jpg'),
+  kotorOldTownView: require('../../assets/photos/kotor-old-town-view.jpg'),
+
+  // ── Festivals — specific events ──
+  festivalMimoze: require('../../assets/photos/festival-mimoze.jpg'),
+  filmFestival: require('../../assets/photos/film-festival.jpg'),
+  bokaNoc: require('../../assets/photos/boka-noc.jpg'),
+  sunceaneSkale: require('../../assets/photos/sunceane-skale.jpg'),
+
+  // ── Shopping — specific places ──
+  zelenaPijaca: require('../../assets/photos/zelena-pijaca.jpg'),
+  stariGradSuveniri: require('../../assets/photos/stari-grad-suveniri.jpg'),
+  hdiCentar: require('../../assets/photos/hdi-centar.jpg'),
+
+  // ── Viewpoints ──
+  tajnoBrdo: require('../../assets/photos/tajno-brdo.jpg'),
+  viewpointBay1: require('../../assets/photos/viewpoint-bay-1.jpg'),
+  viewpointBay2: require('../../assets/photos/viewpoint-bay-2.jpg'),
+
+  // ── Promenade ──
+  promenade1: require('../../assets/photos/promenade-1.jpg'),
+  promenade2: require('../../assets/photos/promenade-2.jpg'),
+  igaloTrail: require('../../assets/photos/igalo-trail.jpg'),
+  toplaArea: require('../../assets/photos/topla-area.jpg'),
+
+  // ── Family ──
+  familyBeach1: require('../../assets/photos/family-beach-1.jpg'),
+  familyBeach2: require('../../assets/photos/family-beach-2.jpg'),
+
+  // ── Bay panorama ──
+  bayOfKotorPanorama: require('../../assets/photos/bay-of-kotor-panorama.jpg'),
+
+  // ── Market (original) ──
+  market1: require('../../assets/photos/market-1.jpg'),
+  market2: require('../../assets/photos/market-2.jpg'),
+
+  // ── Nightlife (original) ──
+  nightlifeBar1: require('../../assets/photos/nightlife-bar-1.jpg'),
+  nightlifeBar2: require('../../assets/photos/nightlife-bar-2.jpg'),
 };
 
-// ── Unsplash for generic categories (food, nightlife, etc.) ──────
-const UNS = {
-  crystalBeach: unsplash('photo-1723714521356-13b98f25f61f'),
-  clearOcean: unsplash('photo-1759674950524-4dd2aaec63ee'),
-  coastPalm: unsplash('photo-1724217552369-22b256e395d9'),
-  blueCave: unsplash('photo-1755433023969-d3842237354a'),
-  harborPlate: unsplash('photo-1646275869281-e99e041965b2'),
-  grilledFish: unsplash('photo-1519708227418-c8fd9a32b7a2'),
-  seafoodPlate: unsplash('photo-1632389879997-330b17bf1923'),
-  sardines: unsplash('photo-1600699899970-b1c9fadd8f9e'),
-  cafeOutdoor: unsplash('photo-1744995537200-3336aa087fd4'),
-  cafeStreet: unsplash('photo-1683806627665-cb37319c526c'),
-  cocktailBar: unsplash('photo-1745060830135-21963bf5ab30'),
-  neonBar: unsplash('photo-1511963118349-e2b22c0efcfc'),
-  farmersMarket: unsplash('photo-1749229964730-a5438ec7ae73'),
-  marketStall: unsplash('photo-1755716274675-444cbf2db134'),
+// ── Per-place hero images (each place gets its own photo) ───────────
+export const placeHeroImages: Record<string, ImageSource> = {
+  // Attractions — each has its own photo
+  'forte-mare': LOCAL.forteMare,
+  'kanli-kula': LOCAL.kanliKula,
+  'fort-spanjola': LOCAL.fortSpanjola,
+  'gradski-muzej': LOCAL.gradskiMuzej,
+  'kuca-iva-andrica': LOCAL.kucaIvaAndrica,
+  'spomenik-tvrtku': LOCAL.spomenikTvrtku,
+  'sahat-kula': LOCAL.sahatKula,
+
+  // Viewpoints
+  'tajno-brdo': LOCAL.tajnoBrdo,
+
+  // Religious — each has its own photo
+  'manastir-savina': LOCAL.manastirSavina,
+  'crkva-sv-arhangela-mihaila': LOCAL.crkvaSvMihaila,
+  'crkva-svetog-jeronima': LOCAL.crkvaSvJeronima,
+  'crkva-svetog-spasa': LOCAL.churchOldTown3,
+  'crkva-sv-leopolda': LOCAL.churchOldTown1,
+  'svetog-save': LOCAL.churchOldTown2,
+
+  // Beaches — each has its own photo
+  'zalo': LOCAL.zaloBeach,
+  'lazure': LOCAL.lazureBeach,
+  'savina-beach': LOCAL.savinaBeach,
+  'perla': LOCAL.perlaBeach,
+  'kalajza': LOCAL.kalajzaBeach,
+  'rafaello': LOCAL.rafaelloBeach,
+  'topla': LOCAL.toplaBeach,
+  'njivice-beach': LOCAL.njiviceBeach,
+  'zanjice': LOCAL.zanjiceBeach,
+  'miriste': LOCAL.miristeBeach,
+  'igalo-beach': LOCAL.igaloBeach,
+
+  // Restaurants — each has its own photo
+  'tri-lipe': LOCAL.triLipe,
+  'gradska-kafana': LOCAL.gradskaKafana,
+  'belveder-restoran': LOCAL.belveder,
+  'portofino': LOCAL.portofino,
+  'konoba-aragosta': LOCAL.konobaAragosta,
+  'feral': LOCAL.feral,
+
+  // Cafes — each has its own photo
+  'fabrika-coffee': LOCAL.fabrikaCoffee,
+  'koffein-specialty': LOCAL.koffeinCafe,
+  'belavista-cafe': LOCAL.belavistaCafe,
+  'nautica-cafe': LOCAL.nauticaCafe,
+
+  // Nightlife — each has its own photo
+  'la-bamba': LOCAL.laBamba,
+  'tondo': LOCAL.tondoBar,
+  'skuribanda': LOCAL.skuribanda,
+  'peoples-beach-bar': LOCAL.peoplesBeachBar,
+
+  // Nearby trips — each has its own photo
+  'plava-spilja': LOCAL.plavaSpilja,
+  'tvrdava-mamula': LOCAL.mamulaIsland,
+  'gospa-od-skrpjela': LOCAL.gospaOdSkrpjela,
+  'rimski-mozaici': LOCAL.rimskiMozaici,
+  'kotor-cable-car': LOCAL.kotorCableCarView,
+
+  // Festivals — each has its own photo
+  'festival-mimoze': LOCAL.festivalMimoze,
+  'herceg-novi-film-festival': LOCAL.filmFestival,
+  'boka-noc': LOCAL.bokaNoc,
+  'sunceane-skale': LOCAL.sunceaneSkale,
+
+  // Shopping — each has its own photo
+  'zelena-pijaca': LOCAL.zelenaPijaca,
+  'stari-grad-suveniri': LOCAL.stariGradSuveniri,
+  'hdi-centar': LOCAL.hdiCentar,
+
+  // Practical — use town views
+  'turisticki-info': LOCAL.hnFromSea,
+  'bolnica-meljine': LOCAL.hnPanorama3,
+  'apoteka-centar': LOCAL.hnSquare,
+  'policija-hn': LOCAL.hnPanoramaPexels1,
+  'autobuska-stanica': LOCAL.hnPanoramaPexels2,
+  'posta-hn': LOCAL.hnOldTownGate,
 };
 
-/** Per-place hero images. */
-export const placeHeroImages: Record<string, string> = {
-  // ── Attractions (REAL photos) ───────────────────────────
-  'forte-mare': HN.forteMare,
-  'kanli-kula': HN.cityWalls,
-  'fort-spanjola': HN.zitadelle,
-  'gradski-muzej': HN.oldTownChurch,
-  'kuca-iva-andrica': HN.oldCity,
-  'spomenik-tvrtku': HN.promenade,
-  'sahat-kula': HN.panoramio10,
-
-  // ── Viewpoints (REAL photos) ────────────────────────────
-  'tajno-brdo': HN.tajnoBrdo,
-
-  // ── Religious (REAL photos) ─────────────────────────────
-  'manastir-savina': HN.churchAscention,
-  'crkva-sv-arhangela-mihaila': HN.churchColor,
-  'crkva-svetog-jeronima': HN.churchAscention,
-  'crkva-svetog-spasa': HN.hercegNoviScene,
-  'crkva-sv-leopolda': HN.oldTownChurch,
-  'svetog-save': HN.churchAscention,
-
-  // ── Beaches (Unsplash — generic crystal water) ──────────
-  'zalo': UNS.crystalBeach,
-  'lazure': UNS.clearOcean,
-  'savina-beach': UNS.coastPalm,
-  'perla': UNS.crystalBeach,
-  'kalajza': UNS.clearOcean,
-  'rafaello': UNS.coastPalm,
-  'topla': UNS.crystalBeach,
-  'njivice-beach': UNS.clearOcean,
-  'zanjice': UNS.coastPalm,
-  'miriste': UNS.crystalBeach,
-  'igalo-beach': UNS.clearOcean,
-
-  // ── Restaurants (Unsplash — food) ───────────────────────
-  'tri-lipe': UNS.harborPlate,
-  'gradska-kafana': UNS.grilledFish,
-  'belveder-restoran': UNS.seafoodPlate,
-  'portofino': UNS.harborPlate,
-  'konoba-aragosta': UNS.sardines,
-  'feral': UNS.grilledFish,
-
-  // ── Cafes (Unsplash) ───────────────────────────────────
-  'fabrika-coffee': UNS.cafeOutdoor,
-  'koffein-specialty': UNS.cafeOutdoor,
-  'belavista-cafe': UNS.cafeStreet,
-  'nautica-cafe': UNS.cafeOutdoor,
-
-  // ── Nightlife (Unsplash) ────────────────────────────────
-  'la-bamba': UNS.cocktailBar,
-  'tondo': UNS.neonBar,
-  'skuribanda': UNS.cocktailBar,
-  'peoples-beach-bar': UNS.neonBar,
-
-  // ── Nearby Trips (mix) ──────────────────────────────────
-  'plava-spilja': UNS.blueCave,
-  'tvrdava-mamula': HN.forteMareSeaFortress,
-  'gospa-od-skrpjela': HN.panorama,
-  'rimski-mozaici': HN.oldCity,
-  'kotor-cable-car': HN.gucalicaPeak,
-
-  // ── Festivals (REAL HN) ─────────────────────────────────
-  'festival-mimoze': HN.promenade,
-  'herceg-novi-film-festival': HN.cityWalls,
-  'boka-noc': HN.panorama,
-  'sunceane-skale': HN.panoramio10,
-
-  // ── Shopping ────────────────────────────────────────────
-  'zelena-pijaca': UNS.farmersMarket,
-  'stari-grad-suveniri': HN.oldTownChurch,
-  'hdi-centar': UNS.marketStall,
-
-  // ── Practical (REAL HN) ─────────────────────────────────
-  'turisticki-info': HN.primorje,
-  'bolnica-meljine': HN.panorama,
-  'apoteka-centar': HN.oldCity,
-  'policija-hn': HN.primorje,
-  'autobuska-stanica': HN.panorama,
-  'posta-hn': HN.oldCity,
+// ── Category fallback images ────────────────────────────────────────
+export const categoryFallbackImages: Record<string, ImageSource> = {
+  attractions: LOCAL.forteMare,
+  religious: LOCAL.manastirSavina,
+  beaches: LOCAL.zanjiceBeach,
+  restaurants: LOCAL.triLipe,
+  cafes: LOCAL.fabrikaCoffee,
+  nightlife: LOCAL.laBamba,
+  viewpoints: LOCAL.tajnoBrdo,
+  nearbyTrips: LOCAL.gospaOdSkrpjela,
+  festivals: LOCAL.festivalMimoze,
+  shopping: LOCAL.zelenaPijaca,
+  practical: LOCAL.hnFromSea,
+  family: LOCAL.familyBeach1,
 };
 
-/** Category fallback images. */
-export const categoryFallbackImages: Record<string, string> = {
-  attractions: HN.forteMare,
-  religious: HN.churchColor,
-  beaches: UNS.crystalBeach,
-  restaurants: UNS.harborPlate,
-  cafes: UNS.cafeOutdoor,
-  nightlife: UNS.cocktailBar,
-  viewpoints: HN.gucalicaPeak,
-  nearbyTrips: HN.panorama,
-  festivals: HN.promenade,
-  shopping: UNS.farmersMarket,
-  practical: HN.primorje,
-  family: HN.promenade,
+// ── Category carousel images (Home screen full-width carousel) ──────
+export const categoryCarouselImages: Record<string, ImageSource> = {
+  attractions: LOCAL.forteMare,
+  religious: LOCAL.manastirSavina,
+  beaches: LOCAL.zanjiceBeach,
+  restaurants: LOCAL.triLipe,
+  cafes: LOCAL.belavistaCafe,
+  nightlife: LOCAL.laBamba,
+  viewpoints: LOCAL.tajnoBrdo,
+  family: LOCAL.familyBeach1,
+  nearbyTrips: LOCAL.gospaOdSkrpjela,
+  festivals: LOCAL.festivalMimoze,
+  shopping: LOCAL.zelenaPijaca,
+  practical: LOCAL.hnFromSea,
 };
 
-/** Category hero images for the category carousel on home. */
-// All Unsplash — reliable, high-quality, no Wikimedia cropping issues
-export const categoryCarouselImages: Record<string, string> = {
-  attractions: `${unsplash('photo-1558618666-fcd25c85cd64')}?w=900&h=600&fit=crop&q=85`,
-  religious:   `${unsplash('photo-1548013146-72479768bada')}?w=900&h=600&fit=crop&q=85`,
-  beaches:     `${UNS.crystalBeach}?w=900&h=600&fit=crop&q=85`,
-  restaurants: `${UNS.harborPlate}?w=900&h=600&fit=crop&q=85`,
-  cafes:       `${UNS.cafeOutdoor}?w=900&h=600&fit=crop&q=85`,
-  nightlife:   `${UNS.cocktailBar}?w=900&h=600&fit=crop&q=85`,
-  viewpoints:  `${unsplash('photo-1506905925346-21bda4d32df4')}?w=900&h=600&fit=crop&q=85`,
-  family:      `${unsplash('photo-1507525428034-b723cf961d3e')}?w=900&h=600&fit=crop&q=85`,
-  nearbyTrips: `${unsplash('photo-1476514525535-07fb3b4ae5f1')}?w=900&h=600&fit=crop&q=85`,
-  festivals:   `${unsplash('photo-1533174072545-7a4b6ad7a6c3')}?w=900&h=600&fit=crop&q=85`,
-  shopping:    `${UNS.farmersMarket}?w=900&h=600&fit=crop&q=85`,
-  practical:   `${unsplash('photo-1530521954074-e64f6810b32d')}?w=900&h=600&fit=crop&q=85`,
-};
-
-/** Get hero image URL for a place. Appends sizing params for Unsplash URLs only. */
-export const getHeroImageUri = (placeId: string, category: string, w = 800, h = 500): string => {
-  const base = placeHeroImages[placeId] ?? categoryFallbackImages[category];
-  if (!base) return '';
-  // Only append query params for Unsplash URLs (Wikimedia URLs are already sized)
-  if (base.includes('unsplash.com')) {
-    return `${base}?w=${w}&h=${h}&fit=crop&q=80`;
-  }
-  return base;
+// ── Helper ──────────────────────────────────────────────────────────
+export const getHeroImageUri = (placeId: string, category: string): ImageSource => {
+  return placeHeroImages[placeId] ?? categoryFallbackImages[category] ?? LOCAL.hnPanorama1;
 };

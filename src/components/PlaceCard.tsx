@@ -66,7 +66,7 @@ export const PlaceCard = memo(({ place, isSaved, onPress, onPressSave, onPressDi
             onPress={onPress}
             style={({ pressed }) => [styles.imageWrap, pressed && styles.imagePressed]}>
           {heroUri ? (
-            <Image source={{ uri: heroUri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
+            <Image source={heroUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
           ) : null}
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.7)']}
