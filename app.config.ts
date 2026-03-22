@@ -1,8 +1,11 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
+const EAS_PROJECT_ID = '9de622e0-c688-4da4-a1b8-4a9b5d5089c9';
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'Herceg Novi Guide',
+  owner: '1302nvc',
   slug: 'hercegnoviguide',
   scheme: 'hercegnoviguide',
   version: '1.0.0',
@@ -14,27 +17,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     resizeMode: 'contain',
     backgroundColor: '#F6F1E7',
   },
-  assetBundlePatterns: ['**/*'],
-  runtimeVersion: {
-    policy: 'appVersion',
-  },
-  updates: {
-    enabled: true,
-    fallbackToCacheTimeout: 30000,
-    url: 'https://u.expo.dev/YOUR_PROJECT_ID',
-  },
-  newArchEnabled: false,
   ios: {
     bundleIdentifier: 'com.mojflow.hercegnoviguide',
     supportsTablet: true,
-    usesAppleSignIn: false,
-    buildNumber: '1',
     infoPlist: {
       NSLocationWhenInUseUsageDescription:
         'Lokaciju koristimo samo kada uključite opcije U blizini ili Najbliže, kako bismo prikazali mjesta oko vas.',
       NSLocationAlwaysAndWhenInUseUsageDescription:
         'Lokaciju koristimo samo kada uključite opcije U blizini ili Najbliže, kako bismo prikazali mjesta oko vas.',
-      UIRequiredDeviceCapabilities: ['location-services'],
     },
   },
   android: {
@@ -47,9 +37,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       monochromeImage: './assets/android-icon-monochrome.png',
     },
     permissions: ['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION'],
-    config: process.env.GOOGLE_MAPS_API_KEY
-      ? { googleMaps: { apiKey: process.env.GOOGLE_MAPS_API_KEY } }
-      : undefined,
   },
   web: {
     bundler: 'metro',
@@ -66,13 +53,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           'Lokaciju koristimo samo za prikaz mjesta u blizini i sortiranje po udaljenosti.',
       },
     ],
-    [
-      'expo-maps',
-      {
-        requestLocationPermission: false,
-      },
-    ],
   ],
+  extra: {
+    eas: {
+      projectId: EAS_PROJECT_ID,
+    },
+  },
   experiments: {
     typedRoutes: true,
   },

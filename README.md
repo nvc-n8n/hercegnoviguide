@@ -30,7 +30,7 @@ Discover attractions, beaches, restaurants, viewpoints, nightlife, and hidden ge
 |-------|-----------|
 | Framework | [Expo SDK 55](https://expo.dev) + [Expo Router](https://docs.expo.dev/router/introduction/) |
 | Language | TypeScript |
-| UI | React Native with `expo-image`, `expo-linear-gradient`, `react-native-reanimated` |
+| UI | React Native with `expo-image`, `expo-linear-gradient` |
 | Fonts | Manrope (body) + Playfair Display (display headings) |
 | State | [Zustand](https://github.com/pmndrs/zustand) |
 | Maps | `expo-maps` + `expo-location` |

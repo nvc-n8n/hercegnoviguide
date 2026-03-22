@@ -1,8 +1,7 @@
 import type { ReactElement } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import type { RefreshControlProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { colors, spacing } from '@/src/theme';
 
@@ -16,23 +15,23 @@ export const Screen = ({ children, scroll = true, refreshControl }: ScreenProps)
   if (!scroll) {
     return (
       <SafeAreaView edges={['top']} style={styles.safe}>
-        <Animated.View entering={FadeIn.duration(200)} style={styles.container}>
+        <View style={styles.container}>
           {children}
-        </Animated.View>
+        </View>
       </SafeAreaView>
     );
   }
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
-      <Animated.View entering={FadeIn.duration(200)} style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={styles.container}
           refreshControl={refreshControl}
           showsVerticalScrollIndicator={false}>
           {children}
         </ScrollView>
-      </Animated.View>
+      </View>
     </SafeAreaView>
   );
 };

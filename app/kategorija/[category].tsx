@@ -2,7 +2,6 @@ import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import Animated, { FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -136,7 +135,7 @@ export default function CategoryScreen() {
 function MasonryCard({ place, aspect, delay }: { place: Place & { distanceMeters?: number | null }; aspect: number; delay: number }) {
   const imgSource = getHeroImageUri(place.id, place.category);
   return (
-    <Animated.View entering={FadeInUp.duration(350).delay(delay)}>
+    <View>
       <Pressable
         accessibilityRole="link"
         onPress={() => router.push(`/mjesto/${place.slug}` as never)}
@@ -169,7 +168,7 @@ function MasonryCard({ place, aspect, delay }: { place: Place & { distanceMeters
           </Pressable>
         </View>
       </Pressable>
-    </Animated.View>
+    </View>
   );
 }
 

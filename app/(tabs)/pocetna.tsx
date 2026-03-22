@@ -3,7 +3,6 @@ import { Dimensions, NativeScrollEvent, NativeSyntheticEvent, Pressable, Refresh
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import Animated, { FadeIn, FadeInUp, FadeInDown, useSharedValue, useAnimatedStyle, withSpring, interpolate } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 
 import { ActionButton } from '@/src/components/ActionButton';
@@ -59,7 +58,7 @@ export default function HomeScreen() {
       refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} tintColor={colors.secondary} />}>
 
       {/* ── HERO: Full-bleed, edge-to-edge ── */}
-      <Animated.View entering={FadeInUp.duration(500).delay(50)} style={styles.heroWrap}>
+      <View style={styles.heroWrap}>
         <Image
           source={require('../../assets/photos/viewpoint-bay-1.jpg')}
           style={StyleSheet.absoluteFill}
@@ -84,10 +83,10 @@ export default function HomeScreen() {
             Grad sunca, stepenica i šćuvanih uvala
           </AppText>
         </View>
-      </Animated.View>
+      </View>
 
       {/* ── CATEGORIES: Full-width paged carousel ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(200)} style={styles.catSection}>
+      <View style={styles.catSection}>
         <View style={styles.catHeader}>
           <SectionHeader subtitle="Biraj kategoriju i kreni" title="Šta te zanima?" />
         </View>
@@ -153,7 +152,7 @@ export default function HomeScreen() {
             <Pressable
               key={i}
               onPress={() => catScrollRef.current?.scrollTo({ x: i * SCREEN_W, animated: true })}>
-              <Animated.View
+              <View
                 style={[
                   styles.catDot,
                   i === activeCatIndex && styles.catDotActive,
@@ -162,10 +161,10 @@ export default function HomeScreen() {
             </Pressable>
           ))}
         </View>
-      </Animated.View>
+      </View>
 
       {/* ── FEATURED: Asymmetric editorial grid ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(350)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader subtitle="Mjesta đe se osjetiš kao svoj" title="Ne propusti" />
         <View style={styles.editorialGrid}>
           {featuredMain ? <EditorialCard place={featuredMain} aspect={16 / 10} delay={0} /> : null}
@@ -181,11 +180,11 @@ export default function HomeScreen() {
           ) : null}
           {featuredThird ? <EditorialCard place={featuredThird} aspect={16 / 10} delay={200} /> : null}
         </View>
-      </Animated.View>
+      </View>
 
       {/* ── NEARBY (moved earlier when location available) ── */}
       {lastKnownLocation ? (
-        <Animated.View entering={FadeInUp.duration(400).delay(450)} style={styles.section}>
+        <View style={styles.section}>
           <SectionHeader title="U blizini" />
           <ScrollView contentContainerStyle={styles.rail} horizontal showsHorizontalScrollIndicator={false}>
             {nearbyPlaces.map((place) => (
@@ -199,11 +198,11 @@ export default function HomeScreen() {
               />
             ))}
           </ScrollView>
-        </Animated.View>
+        </View>
       ) : null}
 
       {/* ── BREAKFAST & MORNING ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(550)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader actionLabel="Sva mjesta" onPressAction={() => router.push('/kategorija/cafes' as never)} subtitle="Jutarnja kafa ili doručak uz pogled" title="Za jutro" />
         <ScrollView contentContainerStyle={styles.rail} horizontal showsHorizontalScrollIndicator={false}>
           {foodPlaces.slice(0, 4).map((place) => (
@@ -217,10 +216,10 @@ export default function HomeScreen() {
             />
           ))}
         </ScrollView>
-      </Animated.View>
+      </View>
 
       {/* ── AFTERNOON: BEACHES & SWIMMING ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(650)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader actionLabel="Sve plaže" onPressAction={() => router.push('/kategorija/beaches' as never)} subtitle="Sunce, more i opuštanje" title="Za popodne" />
         <ScrollView contentContainerStyle={styles.rail} horizontal showsHorizontalScrollIndicator={false}>
           {beachPlaces.map((place) => (
@@ -234,10 +233,10 @@ export default function HomeScreen() {
             />
           ))}
         </ScrollView>
-      </Animated.View>
+      </View>
 
       {/* ── EVENING: DINNER & RESTAURANTS ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(750)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader actionLabel="Sva mjesta" onPressAction={() => router.push('/kategorija/restaurants' as never)} subtitle="Večera s lokalnim specijalitetima" title="Za večer" />
         <ScrollView contentContainerStyle={styles.rail} horizontal showsHorizontalScrollIndicator={false}>
           {foodPlaces.map((place) => (
@@ -251,10 +250,10 @@ export default function HomeScreen() {
             />
           ))}
         </ScrollView>
-      </Animated.View>
+      </View>
 
       {/* ── LATE NIGHT: NIGHTLIFE ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(850)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader actionLabel="Večernja mjesta" onPressAction={() => router.push('/kategorija/nightlife' as never)} subtitle="Barovi, klubovi i noćni život" title="Za kasnije sate" />
         <ScrollView contentContainerStyle={styles.rail} horizontal showsHorizontalScrollIndicator={false}>
           {nightlifePlaces.map((place) => (
@@ -268,12 +267,12 @@ export default function HomeScreen() {
             />
           ))}
         </ScrollView>
-      </Animated.View>
+      </View>
 
       {/* ── MAYOR: Word from the city ── */}
-      <Animated.View entering={FadeInUp.duration(400).delay(950)} style={styles.section}>
+      <View style={styles.section}>
         <MayorCard />
-      </Animated.View>
+      </View>
 
     </Screen>
   );
@@ -354,7 +353,7 @@ function MayorCard() {
 function EditorialCard({ place, aspect, delay }: { place: Place; aspect: number; delay: number }) {
   const imgSource = getHeroImageUri(place.id, place.category);
   return (
-    <Animated.View entering={FadeInUp.duration(400).delay(delay)}>
+    <View>
       <Pressable
         accessibilityRole="link"
         onPress={() => router.push(`/mjesto/${place.slug}` as never)}
@@ -378,7 +377,7 @@ function EditorialCard({ place, aspect, delay }: { place: Place; aspect: number;
           </View>
         </View>
       </Pressable>
-    </Animated.View>
+    </View>
   );
 }
 

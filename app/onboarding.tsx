@@ -4,19 +4,6 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  FadeInUp,
-  FadeOut,
-  SlideInRight,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withSequence,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
 
 import { AppText } from '@/src/components/AppText';
 import { categoryFallbackImages } from '@/src/constants/heroImages';
@@ -54,31 +41,20 @@ export default function OnboardingScreen() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
 
-  // Intro animations
-  const introScale = useSharedValue(0.85);
-  const introOpacity = useSharedValue(0);
-  const lineWidth = useSharedValue(0);
+  // Simple opacity state for intro
+  const [introVisible, setIntroVisible] = useState(false);
+  const [lineVisible, setLineVisible] = useState(false);
+  const [subtitleVisible, setSubtitleVisible] = useState(false);
 
   useEffect(() => {
-    // Animate intro in
-    introOpacity.value = withDelay(300, withTiming(1, { duration: 800 }));
-    introScale.value = withDelay(300, withSpring(1, { damping: 20, stiffness: 90 }));
-    lineWidth.value = withDelay(1200, withTiming(60, { duration: 600 }));
-
+    // Fade in intro
+    const t1 = setTimeout(() => setIntroVisible(true), 300);
+    const t2 = setTimeout(() => setLineVisible(true), 1200);
+    const t3 = setTimeout(() => setSubtitleVisible(true), 1800);
     // Transition to slides after intro
-    const timer = setTimeout(() => setPhase('slides'), 3200);
-    return () => clearTimeout(timer);
-  }, [introOpacity, introScale, lineWidth]);
-
-  const introStyle = useAnimatedStyle(() => ({
-    opacity: introOpacity.value,
-    transform: [{ scale: introScale.value }],
-  }));
-
-  const lineStyle = useAnimatedStyle(() => ({
-    width: lineWidth.value,
-    opacity: withTiming(lineWidth.value > 0 ? 1 : 0, { duration: 300 }),
-  }));
+    const t4 = setTimeout(() => setPhase('slides'), 3200);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+  }, []);
 
   const complete = useCallback(() => {
     setHasSeenOnboarding(true);
@@ -110,36 +86,34 @@ export default function OnboardingScreen() {
           locations={[0.2, 1]}
           style={StyleSheet.absoluteFill}
         />
-        <Animated.View style={[styles.introContent, introStyle]}>
-          <Animated.View entering={FadeIn.duration(600).delay(400)}>
+        <View style={[styles.introContent, { opacity: introVisible ? 1 : 0 }]}>
+          <View>
             <AppText style={styles.introLabel} tone="inverse" variant="caption">
               LOKALNI VODIČ
             </AppText>
-          </Animated.View>
+          </View>
           <AppText serif style={styles.introTitle} tone="inverse">
             Dobro došli u
           </AppText>
           <AppText serif style={styles.introCity} tone="inverse">
             Herceg Novi
           </AppText>
-          <Animated.View style={[styles.introLine, lineStyle]} />
-          <Animated.View entering={FadeInUp.duration(500).delay(1800)}>
+          <View style={[styles.introLine, { width: lineVisible ? 60 : 0, opacity: lineVisible ? 1 : 0 }]} />
+          <View style={{ opacity: subtitleVisible ? 1 : 0 }}>
             <AppText style={styles.introSub} tone="inverse" variant="body">
               Grad sunca, stepenica i šćuvanih uvala
             </AppText>
-          </Animated.View>
-        </Animated.View>
+          </View>
+        </View>
 
         {/* Loading indicator */}
-        <Animated.View
-          entering={FadeIn.duration(400).delay(2200)}
-          style={[styles.loadingWrap, { bottom: insets.bottom + 40 }]}>
+        <View style={[styles.loadingWrap, { bottom: insets.bottom + 40 }]}>
           <View style={styles.loadingDots}>
-            <LoadingDot delay={0} />
-            <LoadingDot delay={150} />
-            <LoadingDot delay={300} />
+            <View style={styles.loadingDot} />
+            <View style={styles.loadingDot} />
+            <View style={styles.loadingDot} />
           </View>
-        </Animated.View>
+        </View>
       </View>
     );
   }
@@ -148,7 +122,7 @@ export default function OnboardingScreen() {
   const controlsHeight = insets.bottom + 130;
 
   return (
-    <Animated.View entering={FadeIn.duration(600)} style={styles.root}>
+    <View style={styles.root}>
       {/* Slides take up space above controls */}
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -171,16 +145,16 @@ export default function OnboardingScreen() {
                 style={StyleSheet.absoluteFill}
               />
               <View style={[styles.slideContent, { paddingBottom: controlsHeight + 20 }]}>
-                <Animated.View entering={FadeInDown.duration(400).delay(100)}>
+                <View>
                   <AppText serif style={styles.slideTitle} tone="inverse">
                     {item.title}
                   </AppText>
-                </Animated.View>
-                <Animated.View entering={FadeInDown.duration(400).delay(250)}>
+                </View>
+                <View>
                   <AppText style={styles.slideBody} tone="inverse" variant="bodyLarge">
                     {item.body}
                   </AppText>
-                </Animated.View>
+                </View>
               </View>
             </View>
           ))}
@@ -188,8 +162,7 @@ export default function OnboardingScreen() {
       </View>
 
       {/* Bottom controls — separate from ScrollView, not overlapping */}
-      <Animated.View
-        entering={FadeInUp.duration(400).delay(300)}
+      <View
         style={[styles.controls, { paddingBottom: insets.bottom + spacing.xxl }]}>
         {/* Step indicator */}
         <View style={styles.stepRow}>
@@ -214,38 +187,20 @@ export default function OnboardingScreen() {
             {activeIndex === slides.length - 1 ? 'Kreni na putovanje' : 'Dalje'}
           </AppText>
         </Pressable>
-      </Animated.View>
-    </Animated.View>
+      </View>
+    </View>
   );
 }
 
 function Dot({ active }: { active: boolean }) {
-  const animStyle = useAnimatedStyle(() => ({
-    width: withSpring(active ? 24 : 8, { damping: 18, stiffness: 180 }),
-    opacity: withSpring(active ? 1 : 0.35, { damping: 18, stiffness: 180 }),
-  }));
-  return <Animated.View style={[styles.dot, animStyle]} />;
-}
-
-function LoadingDot({ delay }: { delay: number }) {
-  const opacity = useSharedValue(0.3);
-  useEffect(() => {
-    const pulse = () => {
-      opacity.value = withDelay(
-        delay,
-        withSequence(
-          withTiming(1, { duration: 400 }),
-          withTiming(0.3, { duration: 400 }),
-        ),
-      );
-    };
-    pulse();
-    const interval = setInterval(pulse, 1200);
-    return () => clearInterval(interval);
-  }, [delay, opacity]);
-
-  const style = useAnimatedStyle(() => ({ opacity: opacity.value }));
-  return <Animated.View style={[styles.loadingDot, style]} />;
+  return (
+    <View
+      style={[
+        styles.dot,
+        { width: active ? 24 : 8, opacity: active ? 1 : 0.35 },
+      ]}
+    />
+  );
 }
 
 const styles = StyleSheet.create({

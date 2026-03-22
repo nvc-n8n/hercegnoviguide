@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { FadeInDown, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 import { AppText } from '@/src/components/AppText';
 import { getHeroImageUri } from '@/src/constants/heroImages';
@@ -21,30 +20,13 @@ type PlaceListItemProps = {
 export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 0 }: PlaceListItemProps) => {
   const thumbUri = getHeroImageUri(place.id, place.category);
   const categoryColor = categoryByKey[place.category]?.color || colors.primary;
-  const scale = useSharedValue(1);
-
-  const pressAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
-
-  const onPressIn = () => {
-    scale.value = withSpring(0.98, { damping: 18, stiffness: 120 });
-  };
-
-  const onPressOut = () => {
-    scale.value = withSpring(1, { damping: 18, stiffness: 120 });
-  };
-
-  const delay = Math.min(index * 60, 480);
 
   return (
-    <Animated.View entering={FadeInDown.duration(300).delay(delay)} style={[styles.row, { borderLeftColor: categoryColor }, pressAnimStyle]}>
+    <View style={[styles.row, { borderLeftColor: categoryColor }]}>
       <Pressable
         accessibilityRole="link"
         accessibilityLabel={place.title}
         onPress={onPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
         style={({ pressed }) => [styles.mainArea, pressed && styles.pressed]}>
         {thumbUri ? (
           <Image source={thumbUri} style={styles.thumb} contentFit="cover" transition={200} />
@@ -83,7 +65,7 @@ export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 
       <Pressable accessibilityRole="button" accessibilityLabel="Uputstva" onPress={onPressDirections} style={styles.cta}>
         <Ionicons color={colors.primary} name="navigate-outline" size={20} />
       </Pressable>
-    </Animated.View>
+    </View>
   );
 });
 

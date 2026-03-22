@@ -1,6 +1,5 @@
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useState } from 'react';
 
 import { colors, radii, spacing } from '@/src/theme';
@@ -14,27 +13,17 @@ type SearchInputProps = {
 
 export const SearchInput = ({ value, placeholder, onChangeText, onOpenFilters }: SearchInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const borderScale = useSharedValue(1);
-  const shadowOpacity = useSharedValue(0);
-
-  const animStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: borderScale.value }],
-  }));
 
   const handleFocus = () => {
     setIsFocused(true);
-    borderScale.value = withSpring(1.02, { damping: 16, stiffness: 140 });
-    shadowOpacity.value = withSpring(0.15, { damping: 16, stiffness: 140 });
   };
 
   const handleBlur = () => {
     setIsFocused(false);
-    borderScale.value = withSpring(1, { damping: 16, stiffness: 140 });
-    shadowOpacity.value = withSpring(0, { damping: 16, stiffness: 140 });
   };
 
   return (
-  <Animated.View style={[styles.wrap, animStyle, { shadowOpacity }]}>
+  <View style={[styles.wrap, isFocused && styles.wrapFocused]}>
     <Ionicons color={colors.textSoft} name="search-outline" size={20} />
     <TextInput
       accessibilityLabel={placeholder}
@@ -52,7 +41,7 @@ export const SearchInput = ({ value, placeholder, onChangeText, onOpenFilters }:
         <Ionicons color={colors.primary} name="options-outline" size={20} />
       </Pressable>
     ) : null}
-  </Animated.View>
+  </View>
   );
 };
 
@@ -66,6 +55,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  wrapFocused: {
+    transform: [{ scale: 1.02 }],
   },
   input: {
     flex: 1,

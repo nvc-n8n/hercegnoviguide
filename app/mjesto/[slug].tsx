@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Linking, Pressable, StyleSheet, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import Animated, { FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -69,7 +68,7 @@ export default function PlaceDetailScreen() {
       </View>
 
       {/* Action row */}
-      <Animated.View entering={FadeInUp.duration(300).delay(100)} style={styles.actionRow}>
+      <View style={styles.actionRow}>
         <View style={styles.actionPrimary}>
           <ActionButton
             icon="navigate-outline"
@@ -93,10 +92,10 @@ export default function PlaceDetailScreen() {
           style={styles.actionIcon}>
           <Ionicons color={colors.textMuted} name="share-social-outline" size={22} />
         </Pressable>
-      </Animated.View>
+      </View>
 
       {/* Description card */}
-      <Animated.View entering={FadeInUp.duration(300).delay(200)} style={styles.metaCard}>
+      <View style={styles.metaCard}>
         <AppText serif variant="subheading">
           O mjestu
         </AppText>
@@ -117,11 +116,11 @@ export default function PlaceDetailScreen() {
             </View>
           ) : null}
         </View>
-      </Animated.View>
+      </View>
 
       {/* Quick facts */}
       {place.quickFacts.length > 0 ? (
-        <Animated.View entering={FadeInUp.duration(300).delay(300)} style={styles.section}>
+        <View style={styles.section}>
           <SectionHeader title="Brže informacije" />
           <View style={styles.quickFacts}>
             {place.quickFacts.map((fact) => (
@@ -135,17 +134,17 @@ export default function PlaceDetailScreen() {
               </View>
             ))}
           </View>
-        </Animated.View>
+        </View>
       ) : null}
 
       {/* Map */}
-      <Animated.View entering={FadeInUp.duration(300).delay(400)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader title="Lokacija" />
         <MapPreview address={place.address} lat={place.lat} lng={place.lng} title={place.title} />
-      </Animated.View>
+      </View>
 
       {/* Contact */}
-      <Animated.View entering={FadeInUp.duration(300).delay(500)} style={styles.section}>
+      <View style={styles.section}>
         <SectionHeader title="Kontakt i linkovi" />
         <View style={styles.contactRow}>
           {place.phone ? (
@@ -158,11 +157,11 @@ export default function PlaceDetailScreen() {
             <AppText tone="muted" variant="label">Kontaktni podaci uskoro.</AppText>
           ) : null}
         </View>
-      </Animated.View>
+      </View>
 
       {/* Related places */}
       {relatedPlaces.length > 0 ? (
-        <Animated.View entering={FadeInUp.duration(300).delay(600)} style={styles.section}>
+        <View style={styles.section}>
           <SectionHeader title="Slična mjesta" />
           <View style={styles.related}>
             {relatedPlaces.map((relatedPlace, index) => (
@@ -177,7 +176,7 @@ export default function PlaceDetailScreen() {
               />
             ))}
           </View>
-        </Animated.View>
+        </View>
       ) : null}
 
       <View style={styles.sourceCard}>

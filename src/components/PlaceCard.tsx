@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'expo-image';
-import Animated, { FadeInUp, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 
 import { AppText } from '@/src/components/AppText';
@@ -21,43 +20,12 @@ type PlaceCardProps = {
 
 export const PlaceCard = memo(({ place, isSaved, onPress, onPressSave, onPressDirections }: PlaceCardProps) => {
   const heroUri = getHeroImageUri(place.id, place.category);
-  const cardScale = useSharedValue(1);
-  const cardOpacity = useSharedValue(1);
-  const heartScale = useSharedValue(1);
-
-  const cardAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: cardScale.value }],
-    opacity: cardOpacity.value,
-  }));
-
-  const heartAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: heartScale.value }],
-  }));
-
-  const handleCardPressIn = () => {
-    cardScale.value = withSpring(0.96, { damping: 18, stiffness: 180 });
-    cardOpacity.value = withSpring(0.92, { damping: 18, stiffness: 180 });
-  };
-
-  const handleCardPressOut = () => {
-    cardScale.value = withSpring(1, { damping: 18, stiffness: 180 });
-    cardOpacity.value = withSpring(1, { damping: 18, stiffness: 180 });
-  };
-
-  const handlePressSave = () => {
-    heartScale.value = withSpring(0, { damping: 12, stiffness: 100 });
-    heartScale.value = withSpring(1.3, { damping: 12, stiffness: 100 });
-    heartScale.value = withSpring(1, { damping: 12, stiffness: 100 });
-    onPressSave();
-  };
 
   return (
-    <Animated.View entering={FadeInUp.duration(280)} style={[styles.wrap, cardAnimStyle]}>
+    <View style={styles.wrap}>
       <Pressable
-        onPressIn={handleCardPressIn}
-        onPressOut={handleCardPressOut}
         accessible={false}
-        style={styles.pressWrap}>
+        style={({ pressed }) => [styles.pressWrap, pressed && { opacity: 0.92, transform: [{ scale: 0.96 }] }]}>
         <View style={styles.card}>
           {/* Image area — taps navigate to detail */}
           <Pressable
@@ -93,14 +61,14 @@ export const PlaceCard = memo(({ place, isSaved, onPress, onPressSave, onPressDi
         </Pressable>
 
         {/* Save button — floated over image, outside the image Pressable */}
-        <Animated.View style={[styles.heartBtn, heartAnimStyle]}>
+        <View style={styles.heartBtn}>
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="Sačuvaj mjesto"
-            onPress={handlePressSave}>
+            onPress={onPressSave}>
             <Ionicons color={colors.white} name={isSaved ? 'heart' : 'heart-outline'} size={20} />
           </Pressable>
-        </Animated.View>
+        </View>
 
         {/* Content area */}
         <Pressable
@@ -145,7 +113,7 @@ export const PlaceCard = memo(({ place, isSaved, onPress, onPressSave, onPressDi
         </View>
       </View>
       </Pressable>
-    </Animated.View>
+    </View>
   );
 });
 
