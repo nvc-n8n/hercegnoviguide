@@ -32,7 +32,7 @@ export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 
       {/* Big image */}
       <View style={styles.imageWrap}>
         {thumbUri ? (
-          <Image source={thumbUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={100} cachePolicy="memory-disk" />
+          <Image source={thumbUri} style={StyleSheet.absoluteFill} contentFit="cover" cachePolicy="memory-disk" />
         ) : (
           <View style={styles.imagePlaceholder}>
             <Ionicons color={colors.primary} name="image-outline" size={28} />
@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderRadius: radii.lg,
     overflow: 'hidden',
-    ...shadows.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   pressed: {
-    opacity: 0.9,
-    transform: [{ scale: 0.98 }],
+    opacity: 0.85,
   },
   imageWrap: {
     height: 180,

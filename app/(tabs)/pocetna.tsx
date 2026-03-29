@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Dimensions, Pressable, RefreshControl, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { useCallback, useMemo, useState } from 'react';
+import { FlatList, Pressable, RefreshControl, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
@@ -8,16 +8,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppText } from '@/src/components/AppText';
 import { PlaceCard } from '@/src/components/PlaceCard';
 import { CategoryChip } from '@/src/components/CategoryChip';
-import { Screen } from '@/src/components/Screen';
 import { SectionHeader } from '@/src/components/SectionHeader';
 import { categories } from '@/src/constants/categories';
-import { getHeroImageUri } from '@/src/constants/heroImages';
 import { useLocation } from '@/src/hooks/useLocation';
 import { openDirections } from '@/src/services/directions';
-import { defaultFilters, filterPlaces, getAllPlaces, getCategoryPlaces, getPlacesByTag, getPopularPlaces } from '@/src/services/places';
+import { defaultFilters, filterPlaces, getAllPlaces, getPlacesByTag, getPopularPlaces } from '@/src/services/places';
 import { useAppStore } from '@/src/store/useAppStore';
 import { colors, radii, shadows, spacing } from '@/src/theme';
 import type { Place } from '@/src/types/place';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+type PlaceWithDist = Place & { distanceMeters?: number | null };
 
 export default function HomeScreen() {
   const { width: screenW } = useWindowDimensions();
@@ -27,7 +28,7 @@ export default function HomeScreen() {
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
   const { lastKnownLocation } = useLocation();
 
-  const popularPlaces = useMemo(() => getPopularPlaces(), []);
+  const popularPlaces = useMemo(() => getPopularPlaces().slice(0, 4), []);
   const allPlaces = useMemo(() => getAllPlaces(), []);
   const beachPlaces = useMemo(() => getPlacesByTag('beach').slice(0, 4), []);
   const foodPlaces = useMemo(() => getPlacesByTag('food').slice(0, 4), []);
@@ -40,135 +41,168 @@ export default function HomeScreen() {
     [allPlaces, lastKnownLocation],
   );
 
-  const onRefresh = async () => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await new Promise((resolve) => setTimeout(resolve, 700));
     setRefreshing(false);
-  };
+  }, []);
 
-  const renderPlaceCards = (places: (Place & { distanceMeters?: number | null })[]) => {
-    if (isTablet) {
-      return (
-        <View style={styles.cardGrid}>
-          {places.map((place) => (
-            <PlaceCard
-              fullWidth
-              isSaved={favoriteIds.includes(place.id)}
-              key={place.id}
-              onPress={() => router.push(`/mjesto/${place.slug}` as never)}
-              onPressDirections={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })}
-              onPressSave={() => toggleFavorite(place.id)}
-              place={place}
-            />
-          ))}
-        </View>
-      );
+  const renderCard = useCallback(({ item: place }: { item: PlaceWithDist }) => (
+    <PlaceCard
+      isSaved={favoriteIds.includes(place.id)}
+      onPress={() => router.push(`/mjesto/${place.slug}` as never)}
+      onPressDirections={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })}
+      onPressSave={() => toggleFavorite(place.id)}
+      place={place}
+    />
+  ), [favoriteIds, toggleFavorite]);
+
+  const renderCardGrid = useCallback(({ item: place }: { item: PlaceWithDist }) => (
+    <PlaceCard
+      fullWidth
+      isSaved={favoriteIds.includes(place.id)}
+      onPress={() => router.push(`/mjesto/${place.slug}` as never)}
+      onPressDirections={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })}
+      onPressSave={() => toggleFavorite(place.id)}
+      place={place}
+    />
+  ), [favoriteIds, toggleFavorite]);
+
+  const PlaceRail = useCallback(({ places, title, actionLabel, actionHref }: { places: PlaceWithDist[]; title: string; actionLabel?: string; actionHref?: string }) => (
+    <View style={styles.section}>
+      <View style={styles.sectionPad}>
+        <SectionHeader title={title} actionLabel={actionLabel} onPressAction={actionHref ? () => router.push(actionHref as never) : undefined} />
+      </View>
+      {isTablet ? (
+        <FlatList
+          data={places}
+          keyExtractor={(p) => p.id}
+          renderItem={renderCardGrid}
+          numColumns={2}
+          columnWrapperStyle={styles.gridRow}
+          contentContainerStyle={styles.sectionPad}
+          scrollEnabled={false}
+          removeClippedSubviews
+          initialNumToRender={2}
+        />
+      ) : (
+        <FlatList
+          data={places}
+          keyExtractor={(p) => p.id}
+          renderItem={renderCard}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.cardRail}
+          removeClippedSubviews
+          initialNumToRender={2}
+          maxToRenderPerBatch={2}
+          windowSize={3}
+        />
+      )}
+    </View>
+  ), [isTablet, renderCard, renderCardGrid]);
+
+  // Build sections data for main FlatList
+  const sections = useMemo(() => {
+    const s: { key: string; type: string; data?: PlaceWithDist[]; title?: string; actionLabel?: string; actionHref?: string }[] = [
+      { key: 'hero', type: 'hero' },
+      { key: 'search', type: 'search' },
+      { key: 'categories', type: 'categories' },
+      { key: 'popular', type: 'places', data: popularPlaces, title: 'Najpopularnije', actionLabel: 'Sve', actionHref: '/(tabs)/istrazi' },
+    ];
+    if (nearbyPlaces.length > 0) {
+      s.push({ key: 'nearby', type: 'places', data: nearbyPlaces, title: 'U blizini' });
     }
-    return (
-      <ScrollView contentContainerStyle={styles.cardRail} horizontal showsHorizontalScrollIndicator={false}>
-        {places.map((place) => (
-          <PlaceCard
-            isSaved={favoriteIds.includes(place.id)}
-            key={place.id}
-            onPress={() => router.push(`/mjesto/${place.slug}` as never)}
-            onPressDirections={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })}
-            onPressSave={() => toggleFavorite(place.id)}
-            place={place}
-          />
-        ))}
-      </ScrollView>
+    s.push(
+      { key: 'beaches', type: 'places', data: beachPlaces, title: 'Plaže', actionLabel: 'Sve', actionHref: '/kategorija/beaches' },
+      { key: 'restaurants', type: 'places', data: foodPlaces, title: 'Restorani', actionLabel: 'Sve', actionHref: '/kategorija/restaurants' },
+      { key: 'nightlife', type: 'places', data: nightlifePlaces, title: 'Noćni život', actionLabel: 'Sve', actionHref: '/kategorija/nightlife' },
+      { key: 'mayor', type: 'mayor' },
     );
-  };
+    return s;
+  }, [popularPlaces, nearbyPlaces, beachPlaces, foodPlaces, nightlifePlaces]);
+
+  const renderSection = useCallback(({ item }: { item: typeof sections[0] }) => {
+    switch (item.type) {
+      case 'hero':
+        return (
+          <View style={[styles.heroWrap, { width: screenW, height: isTablet ? 340 : 260 }]}>
+            <Image
+              source={require('../../assets/photos/montenegro-beach-2.jpg')}
+              style={StyleSheet.absoluteFill}
+              contentFit="cover"
+              transition={200}
+              cachePolicy="memory-disk"
+            />
+            <LinearGradient
+              colors={['rgba(74,144,217,0.55)', 'rgba(27,42,74,0.75)']}
+              locations={[0, 1]}
+              style={StyleSheet.absoluteFill}
+            />
+            <View style={styles.heroContent}>
+              <View style={styles.heroTop}>
+                <Ionicons color={colors.white} name="location" size={isTablet ? 28 : 22} />
+                <AppText style={[styles.heroAppName, isTablet && styles.heroAppNameTablet]} tone="inverse">Herceg Novi</AppText>
+              </View>
+              <AppText style={styles.heroTagline} tone="inverse" variant="caption">
+                ISTRAŽI GRAD SUNCA I MORA
+              </AppText>
+            </View>
+          </View>
+        );
+      case 'search':
+        return (
+          <View style={[styles.searchWrap, styles.sectionPad]}>
+            <Pressable
+              onPress={() => router.push('/(tabs)/istrazi' as never)}
+              style={styles.searchBar}>
+              <Ionicons color={colors.textSoft} name="search" size={18} />
+              <AppText tone="soft" variant="body">Pretraži mjesta...</AppText>
+            </Pressable>
+          </View>
+        );
+      case 'categories':
+        return (
+          <View style={styles.section}>
+            <View style={styles.sectionPad}>
+              <SectionHeader title="Kategorije" actionLabel="Sve" onPressAction={() => router.push('/(tabs)/istrazi' as never)} />
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.catRail}>
+              {categories.map((cat) => (
+                <CategoryChip
+                  key={cat.key}
+                  emoji={cat.emoji}
+                  label={cat.shortTitle}
+                  onPress={() => router.push(`/kategorija/${cat.key}` as never)}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        );
+      case 'places':
+        return <PlaceRail places={item.data!} title={item.title!} actionLabel={item.actionLabel} actionHref={item.actionHref} />;
+      case 'mayor':
+        return <View style={styles.sectionPad}><MayorCard /></View>;
+      default:
+        return null;
+    }
+  }, [screenW, isTablet, PlaceRail]);
 
   return (
-    <Screen
-      refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} tintColor={colors.primary} />}>
-
-      {/* ── Hero ── */}
-      <View style={[styles.heroWrap, { width: screenW, height: isTablet ? 340 : 260 }]}>
-        <Image
-          source={require('../../assets/photos/montenegro-beach-2.jpg')}
-          style={StyleSheet.absoluteFill}
-          contentFit="cover"
-          transition={200}
-          cachePolicy="memory-disk"
-        />
-        <LinearGradient
-          colors={['rgba(74,144,217,0.55)', 'rgba(27,42,74,0.75)']}
-          locations={[0, 1]}
-          style={StyleSheet.absoluteFill}
-        />
-        <View style={styles.heroContent}>
-          <View style={styles.heroTop}>
-            <Ionicons color={colors.white} name="location" size={isTablet ? 28 : 22} />
-            <AppText style={[styles.heroAppName, isTablet && styles.heroAppNameTablet]} tone="inverse">Herceg Novi</AppText>
-          </View>
-          <AppText style={styles.heroTagline} tone="inverse" variant="caption">
-            ISTRAŽI GRAD SUNCA I MORA
-          </AppText>
-        </View>
-      </View>
-
-      {/* ── Search ── */}
-      <View style={styles.searchWrap}>
-        <Pressable
-          onPress={() => router.push('/(tabs)/istrazi' as never)}
-          style={styles.searchBar}>
-          <Ionicons color={colors.textSoft} name="search" size={18} />
-          <AppText tone="soft" variant="body">Pretraži mjesta...</AppText>
-        </Pressable>
-      </View>
-
-      {/* ── Categories ── */}
-      <View style={styles.section}>
-        <SectionHeader title="Kategorije" actionLabel="Sve" onPressAction={() => router.push('/(tabs)/istrazi' as never)} />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.catRail}>
-          {categories.map((cat) => (
-            <CategoryChip
-              key={cat.key}
-              emoji={cat.emoji}
-              label={cat.shortTitle}
-              onPress={() => router.push(`/kategorija/${cat.key}` as never)}
-            />
-          ))}
-        </ScrollView>
-      </View>
-
-      {/* ── Most Popular ── */}
-      <View style={styles.section}>
-        <SectionHeader title="Najpopularnije" actionLabel="Sve" onPressAction={() => router.push('/(tabs)/istrazi' as never)} />
-        {renderPlaceCards(popularPlaces.slice(0, 4))}
-      </View>
-
-      {/* ── Nearby ── */}
-      {lastKnownLocation ? (
-        <View style={styles.section}>
-          <SectionHeader title="U blizini" />
-          {renderPlaceCards(nearbyPlaces)}
-        </View>
-      ) : null}
-
-      {/* ── Beaches ── */}
-      <View style={styles.section}>
-        <SectionHeader actionLabel="Sve" onPressAction={() => router.push('/kategorija/beaches' as never)} title="Plaže" />
-        {renderPlaceCards(beachPlaces)}
-      </View>
-
-      {/* ── Restaurants ── */}
-      <View style={styles.section}>
-        <SectionHeader actionLabel="Sve" onPressAction={() => router.push('/kategorija/restaurants' as never)} title="Restorani" />
-        {renderPlaceCards(foodPlaces)}
-      </View>
-
-      {/* ── Nightlife ── */}
-      <View style={styles.section}>
-        <SectionHeader actionLabel="Sve" onPressAction={() => router.push('/kategorija/nightlife' as never)} title="Noćni život" />
-        {renderPlaceCards(nightlifePlaces)}
-      </View>
-
-      {/* ── Mayor ── */}
-      <MayorCard />
-    </Screen>
+    <SafeAreaView edges={['top']} style={styles.safe}>
+      <FlatList
+        data={sections}
+        keyExtractor={(s) => s.key}
+        renderItem={renderSection}
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+        removeClippedSubviews
+        initialNumToRender={4}
+        maxToRenderPerBatch={2}
+        windowSize={5}
+        refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} tintColor={colors.primary} />}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -180,7 +214,7 @@ function MayorCard() {
 
   return (
     <View style={styles.mayorCard}>
-      <Image source={KATIC_PHOTO} style={[styles.mayorPhoto, { height: photoHeight }]} contentFit="cover" contentPosition={{ top: '15%', left: '50%' }} transition={400} />
+      <Image source={KATIC_PHOTO} style={[styles.mayorPhoto, { height: photoHeight }]} contentFit="cover" contentPosition={{ top: '15%', left: '50%' }} transition={200} cachePolicy="memory-disk" />
       <View style={styles.mayorContent}>
         <AppText variant="heading">Dobrodošli u Herceg Novi</AppText>
         <AppText tone="muted" variant="caption">Stevan Katić, Gradonačelnik</AppText>
@@ -199,11 +233,19 @@ function MayorCard() {
   );
 }
 
-
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  container: {
+    gap: spacing.section,
+    paddingBottom: 40,
+  },
+  sectionPad: {
+    paddingHorizontal: spacing.xl,
+  },
   heroWrap: {
-    marginLeft: -spacing.xl,
-    marginTop: -spacing.section,
     borderBottomLeftRadius: radii.xxl,
     borderBottomRightRadius: radii.xxl,
     overflow: 'hidden',
@@ -230,6 +272,7 @@ const styles = StyleSheet.create({
   },
   heroAppNameTablet: {
     fontSize: 36,
+    lineHeight: 46,
   },
   heroTagline: {
     fontFamily: 'Manrope_500Medium',
@@ -248,30 +291,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.md,
     gap: spacing.sm,
-    ...shadows.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   section: {
     gap: spacing.md,
   },
   catRail: {
     gap: spacing.lg,
+    paddingHorizontal: spacing.xl,
     paddingVertical: spacing.xs,
   },
   cardRail: {
     gap: spacing.md,
+    paddingHorizontal: spacing.xl,
     paddingRight: spacing.xxxl,
     paddingVertical: spacing.xs,
   },
-  cardGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  gridRow: {
     gap: spacing.md,
   },
   mayorCard: {
     backgroundColor: colors.card,
     borderRadius: radii.xl,
     overflow: 'hidden',
-    ...shadows.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   mayorPhoto: {
     width: '100%',
