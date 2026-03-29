@@ -29,9 +29,9 @@ export default function HomeScreen() {
 
   const popularPlaces = useMemo(() => getPopularPlaces(), []);
   const allPlaces = useMemo(() => getAllPlaces(), []);
-  const beachPlaces = useMemo(() => getPlacesByTag('beach').slice(0, 6), []);
-  const foodPlaces = useMemo(() => getPlacesByTag('food').slice(0, 6), []);
-  const nightlifePlaces = useMemo(() => allPlaces.filter((p) => p.category === 'nightlife').slice(0, 6), [allPlaces]);
+  const beachPlaces = useMemo(() => getPlacesByTag('beach').slice(0, 4), []);
+  const foodPlaces = useMemo(() => getPlacesByTag('food').slice(0, 4), []);
+  const nightlifePlaces = useMemo(() => allPlaces.filter((p) => p.category === 'nightlife').slice(0, 4), [allPlaces]);
   const nearbyPlaces = useMemo(
     () =>
       lastKnownLocation
@@ -85,12 +85,13 @@ export default function HomeScreen() {
       refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} tintColor={colors.primary} />}>
 
       {/* ── Hero ── */}
-      <View style={[styles.heroWrap, { width: screenW, height: isTablet ? 320 : 240 }]}>
+      <View style={[styles.heroWrap, { width: screenW, height: isTablet ? 340 : 260 }]}>
         <Image
           source={require('../../assets/photos/montenegro-beach-2.jpg')}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
-          transition={500}
+          transition={200}
+          cachePolicy="memory-disk"
         />
         <LinearGradient
           colors={['rgba(74,144,217,0.55)', 'rgba(27,42,74,0.75)']}
@@ -136,7 +137,7 @@ export default function HomeScreen() {
       {/* ── Most Popular ── */}
       <View style={styles.section}>
         <SectionHeader title="Najpopularnije" actionLabel="Sve" onPressAction={() => router.push('/(tabs)/istrazi' as never)} />
-        {renderPlaceCards(popularPlaces.slice(0, isTablet ? 6 : 6))}
+        {renderPlaceCards(popularPlaces.slice(0, 4))}
       </View>
 
       {/* ── Nearby ── */}
@@ -212,6 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: spacing.sm,
+    paddingBottom: spacing.xxxl,
   },
   heroTop: {
     flexDirection: 'row',
@@ -221,6 +223,7 @@ const styles = StyleSheet.create({
   heroAppName: {
     fontFamily: 'Manrope_700Bold',
     fontSize: 28,
+    lineHeight: 38,
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,

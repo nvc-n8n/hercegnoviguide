@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
   splashTitle: {
     fontFamily: 'Manrope_700Bold',
     fontSize: 38,
+    lineHeight: 48,
     textShadowColor: 'rgba(0,0,0,0.15)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 6,

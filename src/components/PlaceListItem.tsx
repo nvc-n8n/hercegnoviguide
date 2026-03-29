@@ -32,7 +32,7 @@ export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 
       {/* Big image */}
       <View style={styles.imageWrap}>
         {thumbUri ? (
-          <Image source={thumbUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={250} />
+          <Image source={thumbUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={100} cachePolicy="memory-disk" />
         ) : (
           <View style={styles.imagePlaceholder}>
             <Ionicons color={colors.primary} name="image-outline" size={28} />

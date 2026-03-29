@@ -39,7 +39,7 @@ export const PlaceCard = memo(({ place, isSaved, onPress, onPressSave, fullWidth
 
         <View style={[styles.imageWrap, isTablet && styles.imageWrapTablet]}>
           {heroUri ? (
-            <Image source={heroUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
+            <Image source={heroUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={150} cachePolicy="memory-disk" />
           ) : (
             <View style={styles.imagePlaceholder}>
               <Ionicons color={colors.primary} name="image-outline" size={28} />
