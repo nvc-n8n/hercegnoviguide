@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 import { AppText } from '@/src/components/AppText';
 import { categoryFallbackImages } from '@/src/constants/heroImages';
@@ -11,24 +12,9 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { colors, radii, spacing } from '@/src/theme';
 
 const slides = [
-  {
-    key: 'discover',
-    image: categoryFallbackImages.viewpoints,
-    title: 'Otkrijte grad\nna obali zaliva',
-    body: 'Atrakcije, plaže, hrana i večernja mjesta — sve na jednom mjestu, bez reklama i bez interneta.',
-  },
-  {
-    key: 'navigate',
-    image: categoryFallbackImages.beaches,
-    title: 'Od ideje do mape\nza sekunde',
-    body: 'Dodirnite Uputstva na bilo kojem mjestu i navigacija se otvara odmah.',
-  },
-  {
-    key: 'save',
-    image: categoryFallbackImages.nightlife,
-    title: 'Sačuvajte plan\nza savršen dan',
-    body: 'Označite omiljene lokacije i napravite plan za jutro, popodne ili veče.',
-  },
+  { key: 'discover', image: categoryFallbackImages.viewpoints, title: 'Otkrijte Herceg Novi', body: 'Atrakcije, plaže, hrana i noćni život — sve na jednom mjestu.' },
+  { key: 'navigate', image: categoryFallbackImages.beaches, title: 'Navigacija jednim dodirom', body: 'Dodirnite Uputstva i navigacija se otvara odmah.' },
+  { key: 'save', image: categoryFallbackImages.nightlife, title: 'Sačuvajte omiljeno', body: 'Označite lokacije i napravite plan za savršen dan.' },
 ];
 
 export default function OnboardingScreen() {
@@ -36,24 +22,15 @@ export default function OnboardingScreen() {
   const insets = useSafeAreaInsets();
   const setHasSeenOnboarding = useAppStore((s) => s.setHasSeenOnboarding);
 
-  // Phase: 'intro' → 'slides'
   const [phase, setPhase] = useState<'intro' | 'slides'>('intro');
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
-
-  // Simple opacity state for intro
   const [introVisible, setIntroVisible] = useState(false);
-  const [lineVisible, setLineVisible] = useState(false);
-  const [subtitleVisible, setSubtitleVisible] = useState(false);
 
   useEffect(() => {
-    // Fade in intro
-    const t1 = setTimeout(() => setIntroVisible(true), 300);
-    const t2 = setTimeout(() => setLineVisible(true), 1200);
-    const t3 = setTimeout(() => setSubtitleVisible(true), 1800);
-    // Transition to slides after intro
-    const t4 = setTimeout(() => setPhase('slides'), 3200);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    const t1 = setTimeout(() => setIntroVisible(true), 400);
+    const t2 = setTimeout(() => setPhase('slides'), 2500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   const complete = useCallback(() => {
@@ -71,265 +48,89 @@ export default function OnboardingScreen() {
     }
   }, [activeIndex, complete, screenW]);
 
-  // ── INTRO PHASE ──
+  // ── SPLASH: Blue gradient ──
   if (phase === 'intro') {
     return (
-      <View style={styles.introRoot}>
-        <Image
-          source={categoryFallbackImages.viewpoints}
-          style={StyleSheet.absoluteFill}
-          contentFit="cover"
-          transition={800}
-        />
-        <LinearGradient
-          colors={['rgba(26,43,61,0.3)', 'rgba(26,43,61,0.85)']}
-          locations={[0.2, 1]}
-          style={StyleSheet.absoluteFill}
-        />
-        <View style={[styles.introContent, { opacity: introVisible ? 1 : 0 }]}>
-          <View>
-            <AppText style={styles.introLabel} tone="inverse" variant="caption">
-              LOKALNI VODIČ
-            </AppText>
-          </View>
-          <AppText serif style={styles.introTitle} tone="inverse">
-            Dobro došli u
-          </AppText>
-          <AppText serif style={styles.introCity} tone="inverse">
-            Herceg Novi
-          </AppText>
-          <View style={[styles.introLine, { width: lineVisible ? 60 : 0, opacity: lineVisible ? 1 : 0 }]} />
-          <View style={{ opacity: subtitleVisible ? 1 : 0 }}>
-            <AppText style={styles.introSub} tone="inverse" variant="body">
-              Grad sunca, stepenica i šćuvanih uvala
-            </AppText>
-          </View>
-        </View>
-
-        {/* Loading indicator */}
-        <View style={[styles.loadingWrap, { bottom: insets.bottom + 40 }]}>
-          <View style={styles.loadingDots}>
-            <View style={styles.loadingDot} />
-            <View style={styles.loadingDot} />
-            <View style={styles.loadingDot} />
-          </View>
+      <View style={styles.splashRoot}>
+        <LinearGradient colors={['#5B9FE6', '#3570B8']} style={StyleSheet.absoluteFill} />
+        <View style={[styles.splashContent, { opacity: introVisible ? 1 : 0 }]}>
+          <Ionicons color={colors.white} name="location" size={40} />
+          <AppText style={styles.splashTitle} tone="inverse">Herceg Novi</AppText>
+          <AppText style={styles.splashTagline} tone="inverse">ISTRAŽI GRAD SUNCA I MORA</AppText>
         </View>
       </View>
     );
   }
 
-  // ── SLIDES PHASE ──
-  const controlsHeight = insets.bottom + 130;
-
+  // ── SLIDES ──
   return (
     <View style={styles.root}>
-      {/* Slides take up space above controls */}
-      <View style={{ flex: 1 }}>
-        <ScrollView
-          ref={scrollRef}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-          scrollEventThrottle={16}
-          onMomentumScrollEnd={(e) => {
-            const idx = Math.round(e.nativeEvent.contentOffset.x / screenW);
-            setActiveIndex(idx);
-          }}>
-          {slides.map((item) => (
-            <View key={item.key} style={{ width: screenW, height: screenH }}>
-              <Image source={item.image} style={StyleSheet.absoluteFill} contentFit="cover" transition={400} />
-              <LinearGradient
-                colors={['rgba(26,43,61,0.05)', 'rgba(26,43,61,0.78)']}
-                locations={[0.25, 1]}
-                style={StyleSheet.absoluteFill}
-              />
-              <View style={[styles.slideContent, { paddingBottom: controlsHeight + 20 }]}>
-                <View>
-                  <AppText serif style={styles.slideTitle} tone="inverse">
-                    {item.title}
-                  </AppText>
-                </View>
-                <View>
-                  <AppText style={styles.slideBody} tone="inverse" variant="bodyLarge">
-                    {item.body}
-                  </AppText>
-                </View>
-              </View>
+      <ScrollView
+        ref={scrollRef}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        bounces={false}
+        scrollEventThrottle={16}
+        onMomentumScrollEnd={(e) => {
+          const idx = Math.round(e.nativeEvent.contentOffset.x / screenW);
+          setActiveIndex(idx);
+        }}>
+        {slides.map((item) => (
+          <View key={item.key} style={{ width: screenW, height: screenH }}>
+            <Image source={item.image} style={{ width: screenW, height: screenH * 0.55 }} contentFit="cover" transition={300} />
+            <View style={styles.slideContent}>
+              <AppText variant="hero">{item.title}</AppText>
+              <AppText tone="muted" variant="body">{item.body}</AppText>
             </View>
-          ))}
-        </ScrollView>
-      </View>
-
-      {/* Bottom controls — separate from ScrollView, not overlapping */}
-      <View
-        style={[styles.controls, { paddingBottom: insets.bottom + spacing.xxl }]}>
-        {/* Step indicator */}
-        <View style={styles.stepRow}>
-          <View style={styles.dots}>
-            {slides.map((_, i) => (
-              <Dot key={i} active={i === activeIndex} />
-            ))}
           </View>
-          <AppText style={styles.stepText} tone="inverse" variant="caption">
-            {activeIndex + 1}/{slides.length}
-          </AppText>
-        </View>
+        ))}
+      </ScrollView>
 
-        {/* Next button */}
-        <Pressable
-          onPress={goNext}
-          style={({ pressed }) => [styles.nextBtn, pressed && styles.nextBtnPressed]}
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel={activeIndex === slides.length - 1 ? 'Start your journey' : 'Next slide'}>
-          <AppText style={styles.nextText} variant="body">
-            {activeIndex === slides.length - 1 ? 'Kreni na putovanje' : 'Dalje'}
+      <View style={[styles.controls, { paddingBottom: insets.bottom + spacing.xl }]}>
+        <View style={styles.dots}>
+          {slides.map((_, i) => (
+            <View key={i} style={[styles.dot, i === activeIndex && styles.dotActive]} />
+          ))}
+        </View>
+        <Pressable onPress={goNext} style={({ pressed }) => [styles.nextBtn, pressed && { opacity: 0.85 }]}>
+          <AppText style={styles.nextText} tone="inverse">
+            {activeIndex === slides.length - 1 ? 'POČNI' : 'DALJE'}
           </AppText>
         </Pressable>
+        {activeIndex < slides.length - 1 ? (
+          <Pressable onPress={complete} style={styles.skipBtn}>
+            <AppText tone="muted" variant="label">Preskoči</AppText>
+          </Pressable>
+        ) : null}
       </View>
     </View>
   );
 }
 
-function Dot({ active }: { active: boolean }) {
-  return (
-    <View
-      style={[
-        styles.dot,
-        { width: active ? 24 : 8, opacity: active ? 1 : 0.35 },
-      ]}
-    />
-  );
-}
-
 const styles = StyleSheet.create({
-  // ── Intro ──
-  introRoot: {
-    flex: 1,
-    backgroundColor: '#1A2B3D',
+  splashRoot: { flex: 1 },
+  splashContent: {
+    flex: 1, justifyContent: 'center', alignItems: 'center', gap: spacing.md,
   },
-  introContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: spacing.sm,
-    paddingHorizontal: spacing.xxl,
-  },
-  introLabel: {
-    fontFamily: 'Manrope_600SemiBold',
-    letterSpacing: 3,
-    fontSize: 11,
-    marginBottom: spacing.lg,
-    textTransform: 'uppercase',
-  },
-  introTitle: {
-    fontFamily: 'PlayfairDisplay_400Regular',
-    fontSize: 28,
-    color: 'rgba(255,255,255,0.8)',
-    textAlign: 'center',
-  },
-  introCity: {
-    fontFamily: 'PlayfairDisplay_700Bold',
-    fontSize: 48,
-    lineHeight: 56,
-    color: colors.white,
-    textAlign: 'center',
-  },
-  introLine: {
-    height: 2,
-    backgroundColor: colors.secondary,
-    marginVertical: spacing.lg,
-    borderRadius: 1,
-  },
-  introSub: {
-    fontFamily: 'Manrope_400Regular',
-    color: 'rgba(255,255,255,0.7)',
-    textAlign: 'center',
-  },
-  loadingWrap: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-  },
-  loadingDots: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-  },
-  loadingDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: 'rgba(255,255,255,0.6)',
-  },
+  splashTitle: { fontFamily: 'Manrope_700Bold', fontSize: 34 },
+  splashTagline: { fontFamily: 'Manrope_500Medium', fontSize: 11, letterSpacing: 3, opacity: 0.8 },
 
-  // ── Slides ──
-  root: {
-    flex: 1,
-    backgroundColor: '#1A2B3D',
-  },
-  slideContent: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: spacing.xxl,
-    gap: spacing.md,
-  },
-  slideTitle: {
-    fontFamily: 'PlayfairDisplay_700Bold',
-    fontSize: 36,
-    lineHeight: 42,
-    color: colors.white,
-    textShadowColor: 'rgba(0,0,0,0.3)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 6,
-  },
-  slideBody: {
-    color: 'rgba(255,255,255,0.85)',
-    fontFamily: 'Manrope_400Regular',
-    lineHeight: 24,
-    maxWidth: '92%',
-  },
+  root: { flex: 1, backgroundColor: colors.background },
+  slideContent: { flex: 1, paddingHorizontal: spacing.xxl, paddingTop: spacing.xxl, gap: spacing.sm },
 
-  // ── Controls ──
   controls: {
-    paddingHorizontal: spacing.xxl,
-    paddingTop: spacing.lg,
-    gap: spacing.xl,
-    backgroundColor: '#1A2B3D',
+    position: 'absolute', bottom: 0, left: 0, right: 0,
+    paddingHorizontal: spacing.xxl, paddingTop: spacing.lg,
+    backgroundColor: colors.background, gap: spacing.lg,
   },
-  stepRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  dots: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  dot: {
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.white,
-  },
-  stepText: {
-    color: 'rgba(255,255,255,0.5)',
-    fontFamily: 'Manrope_500Medium',
-  },
+  dots: { flexDirection: 'row', justifyContent: 'center', gap: spacing.sm },
+  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.border },
+  dotActive: { backgroundColor: colors.primary, width: 24 },
   nextBtn: {
-    backgroundColor: colors.white,
-    paddingVertical: spacing.lg,
-    borderRadius: radii.pill,
-    alignItems: 'center',
+    backgroundColor: colors.primary, paddingVertical: spacing.lg,
+    borderRadius: radii.pill, alignItems: 'center',
   },
-  nextBtnPressed: {
-    opacity: 0.9,
-    transform: [{ scale: 0.98 }],
-  },
-  nextText: {
-    color: colors.secondary,
-    fontFamily: 'Manrope_700Bold',
-    fontSize: 16,
-  },
+  nextText: { fontFamily: 'Manrope_700Bold', fontSize: 15, letterSpacing: 1 },
+  skipBtn: { alignItems: 'center', paddingVertical: spacing.sm },
 });

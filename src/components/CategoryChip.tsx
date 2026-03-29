@@ -1,54 +1,65 @@
-import { Pressable, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 import { AppText } from '@/src/components/AppText';
-import { colors, radii, spacing } from '@/src/theme';
+import { colors, spacing } from '@/src/theme';
 
 type CategoryChipProps = {
   label: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  tint: string;
+  emoji: string;
   onPress?: () => void;
   active?: boolean;
 };
 
-export const CategoryChip = ({ label, icon, tint, onPress, active = false }: CategoryChipProps) => (
-  <Pressable
-    accessible={true}
-    accessibilityRole="button"
-    accessibilityLabel={`${label}${active ? ', selected' : ''}`}
-    onPress={onPress}
-    style={[styles.container, active && styles.active]}>
-    <View style={[styles.iconWrap, { backgroundColor: tint }]}>
-      <Ionicons color={colors.white} name={icon} size={20} />
-    </View>
-    <AppText style={styles.label} variant="label">
-      {label}
-    </AppText>
-  </Pressable>
-);
+export const CategoryChip = ({ label, emoji, onPress, active = false }: CategoryChipProps) => {
+  const { width } = useWindowDimensions();
+  const isTablet = width >= 768;
+  const circleSize = isTablet ? 72 : 56;
+
+  return (
+    <Pressable
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={`${label}${active ? ', selected' : ''}`}
+      onPress={onPress}
+      style={({ pressed }) => [styles.container, isTablet && styles.containerTablet, pressed && styles.pressed]}>
+      <View style={[styles.iconCircle, { width: circleSize, height: circleSize, borderRadius: circleSize / 2 }]}>
+        <Text style={[styles.emoji, isTablet && styles.emojiTablet]}>{emoji}</Text>
+      </View>
+      <AppText style={[styles.label, isTablet && styles.labelTablet]} numberOfLines={1} variant="caption">{label}</AppText>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 108,
-    padding: spacing.md,
-    borderRadius: radii.lg,
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
+    alignItems: 'center',
     gap: spacing.sm,
+    width: 72,
   },
-  active: {
-    borderColor: colors.primary,
+  containerTablet: {
+    width: 90,
   },
-  iconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: radii.pill,
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.95 }],
+  },
+  iconCircle: {
+    backgroundColor: colors.primaryLight,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  emoji: {
+    fontSize: 26,
+  },
+  emojiTablet: {
+    fontSize: 34,
+  },
   label: {
-    fontFamily: 'Manrope_700Bold',
+    fontFamily: 'Manrope_500Medium',
+    color: colors.text,
+    textAlign: 'center',
+  },
+  labelTablet: {
+    fontSize: 13,
   },
 });

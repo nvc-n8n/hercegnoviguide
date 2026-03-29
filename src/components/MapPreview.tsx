@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { AppText } from '@/src/components/AppText';
-import { colors, radii, spacing } from '@/src/theme';
+import { colors, radii, shadows, spacing } from '@/src/theme';
 
 type MapPreviewProps = {
   title: string;
@@ -11,33 +11,44 @@ type MapPreviewProps = {
   address: string;
 };
 
-export const MapPreview = ({ title, lat, lng, address }: MapPreviewProps) => {
-  return (
-    <View style={styles.fallback} accessible={true} accessibilityLabel={`Location: ${title}`} accessibilityHint={address}>
-      <Ionicons color={colors.primary} name="map-outline" size={26} />
-      <AppText style={styles.fallbackTitle} variant="bodyLarge">
-        {title}
-      </AppText>
-      <AppText tone="muted" variant="label">
-        {address}
-      </AppText>
+export const MapPreview = ({ title, lat, lng, address }: MapPreviewProps) => (
+  <View style={styles.card} accessible={true} accessibilityLabel={`Location: ${title}`} accessibilityHint={address}>
+    <View style={styles.iconCircle}>
+      <Ionicons color={colors.primary} name="map" size={24} />
     </View>
-  );
-};
+    <AppText style={styles.title} variant="body">{title}</AppText>
+    <View style={styles.locationRow}>
+      <Ionicons color={colors.primary} name="location" size={12} />
+      <AppText tone="muted" variant="caption">{address}</AppText>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
-  fallback: {
-    height: 180,
+  card: {
+    height: 140,
     borderRadius: radii.lg,
-    backgroundColor: colors.cardAlt,
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
     padding: spacing.lg,
+    gap: spacing.sm,
+    ...shadows.soft,
   },
-  fallbackTitle: {
-    marginTop: spacing.md,
-    fontFamily: 'Manrope_700Bold',
+  iconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.primaryLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontFamily: 'Manrope_600SemiBold',
+  },
+  locationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
 });

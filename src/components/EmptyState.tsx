@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -23,23 +22,11 @@ export const EmptyState = memo(({
   onPressAction,
 }: EmptyStateProps) => (
   <View style={styles.container}>
-    <View style={styles.iconWrap}>
-      <LinearGradient
-        colors={[colors.primary, colors.primaryDeep]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.gradientBg}>
-        <Ionicons color={colors.white} name={icon} size={28} />
-      </LinearGradient>
-      <View style={styles.iconBorder} />
+    <View style={styles.iconCircle}>
+      <Ionicons color={colors.primary} name={icon} size={36} />
     </View>
-    <AppText serif style={styles.title} variant="heading">
-      {title}
-    </AppText>
-    <View style={styles.line} />
-    <AppText style={styles.body} tone="muted">
-      {body}
-    </AppText>
+    <AppText variant="heading" style={styles.title}>{title}</AppText>
+    <AppText style={styles.body} tone="muted" variant="body">{body}</AppText>
     {actionLabel && onPressAction ? <ActionButton label={actionLabel} onPress={onPressAction} /> : null}
   </View>
 ));
@@ -47,48 +34,24 @@ export const EmptyState = memo(({
 const styles = StyleSheet.create({
   container: {
     paddingVertical: spacing.xxxl,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.xl,
     alignItems: 'center',
-    gap: spacing.lg,
-    justifyContent: 'center',
+    gap: spacing.md,
   },
-  iconWrap: {
-    position: 'relative',
-    width: 80,
-    height: 80,
-    justifyContent: 'center',
+  iconCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: colors.primaryLight,
     alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  gradientBg: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconBorder: {
-    position: 'absolute',
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.3)',
-  },
-  line: {
-    width: 32,
-    height: 2,
-    backgroundColor: colors.secondary,
-    borderRadius: 1,
     marginBottom: spacing.sm,
   },
   title: {
     textAlign: 'center',
-    marginBottom: spacing.xs,
   },
   body: {
     textAlign: 'center',
-    maxWidth: 320,
-    lineHeight: 20,
+    maxWidth: 280,
   },
 });

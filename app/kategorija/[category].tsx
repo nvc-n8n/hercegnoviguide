@@ -59,12 +59,12 @@ export default function CategoryScreen() {
       <View style={styles.heroWrap}>
         <Image source={heroSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={500} />
         <LinearGradient
-          colors={['rgba(26,43,61,0.08)', 'rgba(26,43,61,0.75)']}
+          colors={['transparent', 'rgba(0,0,0,0.55)']}
           locations={[0.2, 1]}
           style={StyleSheet.absoluteFill}
         />
         <View style={styles.heroContent}>
-          <AppText serif style={styles.heroTitle} tone="inverse">
+          <AppText style={styles.heroTitle} tone="inverse">
             {config.title}
           </AppText>
           <AppText style={styles.heroSub} tone="inverse" variant="body">
@@ -145,12 +145,12 @@ function MasonryCard({ place, aspect, delay }: { place: Place & { distanceMeters
             <Image source={imgSource} style={StyleSheet.absoluteFill} contentFit="cover" transition={300} />
           ) : null}
           <LinearGradient
-            colors={['transparent', 'rgba(26,43,61,0.7)']}
+            colors={['transparent', 'rgba(0,0,0,0.55)']}
             locations={[0.35, 1]}
             style={StyleSheet.absoluteFill}
           />
           <View style={styles.cardContent}>
-            <AppText serif style={styles.cardTitle} tone="inverse" variant="heading">
+            <AppText style={styles.cardTitle} tone="inverse" variant="heading">
               {place.title}
             </AppText>
             <AppText style={styles.cardAddress} tone="inverse" variant="label" numberOfLines={1}>

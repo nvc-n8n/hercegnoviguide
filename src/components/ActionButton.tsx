@@ -28,7 +28,6 @@ export const ActionButton = memo(({
       accessible={true}
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityHint={disabled ? "Button is disabled" : undefined}
       disabled={disabled}
       onPress={onPress}
       style={({ pressed }) => [
@@ -48,7 +47,7 @@ export const ActionButton = memo(({
           />
         ) : null}
         <AppText
-          style={styles.label}
+          style={[styles.label, isGhost && styles.ghostLabel]}
           tone={isGhost ? 'default' : 'inverse'}
           variant="body">
           {label}
@@ -60,27 +59,26 @@ export const ActionButton = memo(({
 
 const styles = StyleSheet.create({
   base: {
-    minHeight: 48,
-    paddingHorizontal: spacing.lg,
+    minHeight: 46,
+    paddingHorizontal: spacing.xl,
     borderRadius: radii.pill,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.secondary,
-  },
-  secondary: {
     backgroundColor: colors.primary,
   },
+  secondary: {
+    backgroundColor: colors.text,
+  },
   ghost: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: colors.primaryLight,
+    borderWidth: 0,
   },
   pressed: {
-    opacity: 0.88,
-    transform: [{ scale: 0.97 }],
+    opacity: 0.85,
+    transform: [{ scale: 0.98 }],
   },
   disabled: {
-    opacity: 0.55,
+    opacity: 0.4,
   },
   content: {
     flexDirection: 'row',
@@ -90,6 +88,9 @@ const styles = StyleSheet.create({
     marginRight: spacing.sm,
   },
   label: {
-    fontFamily: 'Manrope_700Bold',
+    fontFamily: 'Manrope_600SemiBold',
+  },
+  ghostLabel: {
+    color: colors.primary,
   },
 });

@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,57 +9,68 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.secondary,
+        tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textSoft,
         tabBarStyle: {
-          backgroundColor: '#FFFAF6',
-          borderTopColor: '#E0D5C8',
-          borderTopWidth: 1,
+          backgroundColor: colors.card,
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowColor: '#1B2A4A',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.06,
+          shadowRadius: 8,
           paddingTop: 8,
-          height: 84,
+          height: 80,
         },
         tabBarLabelStyle: {
-          fontFamily: 'Manrope_600SemiBold',
-          fontSize: 11,
-          marginTop: 4,
-        },
-        tabBarItemStyle: {
-          paddingVertical: 8,
+          fontFamily: 'Manrope_500Medium',
+          fontSize: 10,
+          marginTop: 2,
         },
       }}>
       <Tabs.Screen
         name="pocetna"
         options={{
           title: 'Početna',
-          tabBarIcon: ({ color, size }) => <Ionicons color={color} name="home-outline" size={size} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons color={color} name={focused ? 'home' : 'home-outline'} size={22} />
+          ),
         }}
       />
       <Tabs.Screen
         name="istrazi"
         options={{
           title: 'Istraži',
-          tabBarIcon: ({ color, size }) => <Ionicons color={color} name="compass-outline" size={size} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons color={color} name={focused ? 'search' : 'search-outline'} size={22} />
+          ),
         }}
       />
       <Tabs.Screen
         name="mapa"
         options={{
           title: 'Mapa',
-          tabBarIcon: ({ color, size }) => <Ionicons color={color} name="map-outline" size={size} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons color={color} name={focused ? 'map' : 'map-outline'} size={22} />
+          ),
         }}
       />
       <Tabs.Screen
         name="sacuvano"
         options={{
           title: 'Sačuvano',
-          tabBarIcon: ({ color, size }) => <Ionicons color={color} name="heart-outline" size={size} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons color={color} name={focused ? 'heart' : 'heart-outline'} size={22} />
+          ),
         }}
       />
       <Tabs.Screen
         name="vise"
         options={{
           title: 'Više',
-          tabBarIcon: ({ color, size }) => <Ionicons color={color} name="menu-outline" size={size} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons color={color} name={focused ? 'person' : 'person-outline'} size={22} />
+          ),
         }}
       />
     </Tabs>

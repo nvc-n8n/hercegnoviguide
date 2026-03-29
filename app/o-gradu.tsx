@@ -61,7 +61,7 @@ export default function AboutCityScreen() {
           transition={400}
         />
         <LinearGradient
-          colors={['rgba(26,43,61,0.05)', 'rgba(26,43,61,0.6)']}
+          colors={['rgba(0,0,0,0.05)', 'rgba(0,0,0,0.6)']}
           locations={[0.4, 1]}
           style={StyleSheet.absoluteFill}
         />
@@ -98,7 +98,7 @@ export default function AboutCityScreen() {
                   transition={300}
                 />
                 <LinearGradient
-                  colors={['transparent', 'rgba(26,43,61,0.25)']}
+                  colors={['transparent', 'rgba(0,0,0,0.25)']}
                   style={StyleSheet.absoluteFill}
                 />
               </View>

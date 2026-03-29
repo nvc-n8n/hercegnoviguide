@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
 import { AppText } from '@/src/components/AppText';
-import { colors, radii, spacing } from '@/src/theme';
+import { colors, radii, shadows, spacing } from '@/src/theme';
 
 type MenuItem = {
   href: string;
@@ -22,16 +22,12 @@ export const MenuLinkList = ({ items }: { items: MenuItem[] }) => (
           accessibilityLabel={item.title}
           accessibilityHint={item.subtitle}
           style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}>
-          <View style={styles.iconWrap}>
+          <View style={styles.iconCircle}>
             <Ionicons color={colors.primary} name={item.icon} size={20} />
           </View>
           <View style={styles.content}>
-            <AppText style={styles.title} variant="bodyLarge">
-              {item.title}
-            </AppText>
-            <AppText tone="muted" variant="label">
-              {item.subtitle}
-            </AppText>
+            <AppText style={styles.title} variant="body">{item.title}</AppText>
+            <AppText tone="muted" variant="caption">{item.subtitle}</AppText>
           </View>
           <Ionicons color={colors.textSoft} name="chevron-forward" size={18} />
         </Pressable>
@@ -42,7 +38,7 @@ export const MenuLinkList = ({ items }: { items: MenuItem[] }) => (
 
 const styles = StyleSheet.create({
   list: {
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   row: {
     flexDirection: 'row',
@@ -50,26 +46,26 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderRadius: radii.lg,
     padding: spacing.lg,
-    borderWidth: 1,
-    borderColor: colors.border,
+    gap: spacing.md,
+    ...shadows.soft,
   },
   rowPressed: {
-    opacity: 0.9,
-    backgroundColor: colors.cardAlt,
+    opacity: 0.85,
+    transform: [{ scale: 0.99 }],
   },
-  iconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: radii.pill,
-    backgroundColor: colors.cardAlt,
+  iconCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.primaryLight,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: spacing.md,
   },
   content: {
     flex: 1,
+    gap: 2,
   },
   title: {
-    fontFamily: 'Manrope_700Bold',
+    fontFamily: 'Manrope_600SemiBold',
   },
 });

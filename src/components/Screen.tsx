@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: spacing.xl,
-    paddingBottom: spacing.xxxl,
+    paddingBottom: 40,
     gap: spacing.section,
   },
 });

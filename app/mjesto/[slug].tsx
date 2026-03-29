@@ -18,7 +18,7 @@ import { openDirections } from '@/src/services/directions';
 import { sharePlace } from '@/src/services/share';
 import { getCategoryPlaces, getPlaceBySlug } from '@/src/services/places';
 import { useAppStore } from '@/src/store/useAppStore';
-import { colors, radii, spacing } from '@/src/theme';
+import { colors, radii, shadows, spacing } from '@/src/theme';
 
 export default function PlaceDetailScreen() {
   const insets = useSafeAreaInsets();
@@ -29,27 +29,24 @@ export default function PlaceDetailScreen() {
   const place = getPlaceBySlug(params.slug);
 
   useEffect(() => {
-    if (place) {
-      addRecentView(place.id);
-    }
+    if (place) addRecentView(place.id);
   }, [addRecentView, place]);
 
   if (!place) {
     return (
       <Screen>
-        <EmptyState body="Mjesto nije pronađeno u lokalnom vodiču." title="Mjesto nije dostupno" />
+        <EmptyState body="Mjesto nije pronađeno." title="Nije dostupno" />
       </Screen>
     );
   }
 
   const isSaved = favoriteIds.includes(place.id);
   const relatedPlaces = getCategoryPlaces(place.category)
-    .filter((candidate) => candidate.id !== place.id)
+    .filter((c) => c.id !== place.id)
     .slice(0, 4);
 
   return (
     <Screen>
-      {/* Hero with floating back button */}
       <View>
         <HeroCard
           badge={formatCategory(place.category)}
@@ -62,212 +59,114 @@ export default function PlaceDetailScreen() {
           accessibilityRole="button"
           accessibilityLabel="Nazad"
           onPress={() => router.back()}
-          style={[styles.backBtn, { top: Math.max(insets.top, spacing.lg) + spacing.sm }]}>
-          <Ionicons color={colors.white} name="arrow-back" size={22} />
+          style={[styles.backBtn, { top: Math.max(insets.top, spacing.lg) }]}>
+          <Ionicons color={colors.text} name="chevron-back" size={22} />
         </Pressable>
       </View>
 
-      {/* Action row */}
+      {/* Actions */}
       <View style={styles.actionRow}>
         <View style={styles.actionPrimary}>
-          <ActionButton
-            icon="navigate-outline"
-            label="Uputstva"
-            onPress={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })}
-          />
+          <ActionButton icon="navigate" label="Uputstva" onPress={() => openDirections({ title: place.title, lat: place.lat, lng: place.lng })} />
         </View>
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel={isSaved ? 'Remove from favorites' : 'Add to favorites'}
-          onPress={() => toggleFavorite(place.id)}
-          style={styles.actionIcon}>
-          <Ionicons color={isSaved ? colors.danger : colors.textMuted} name={isSaved ? 'heart' : 'heart-outline'} size={22} />
+        <Pressable onPress={() => toggleFavorite(place.id)} style={styles.actionCircle}>
+          <Ionicons color={isSaved ? colors.secondary : colors.textMuted} name={isSaved ? 'heart' : 'heart-outline'} size={20} />
         </Pressable>
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Share this place"
-          onPress={() => sharePlace(place)}
-          style={styles.actionIcon}>
-          <Ionicons color={colors.textMuted} name="share-social-outline" size={22} />
+        <Pressable onPress={() => sharePlace(place)} style={styles.actionCircle}>
+          <Ionicons color={colors.textMuted} name="share-outline" size={20} />
         </Pressable>
       </View>
 
-      {/* Description card */}
-      <View style={styles.metaCard}>
-        <AppText serif variant="subheading">
-          O mjestu
-        </AppText>
-        <AppText tone="muted" style={styles.descriptionText}>{place.description}</AppText>
-        <View style={styles.metaGroup}>
-          <View style={styles.metaRow}>
-            <Ionicons color={colors.primary} name="location-outline" size={16} />
-            <AppText variant="label">{place.address}</AppText>
-          </View>
-          <View style={styles.metaRow}>
-            <Ionicons color={colors.warning} name="star-outline" size={16} />
-            <AppText variant="label">{formatRating(place.rating, place.reviewCount)}</AppText>
-          </View>
-          {place.openingHours?.weekdayText?.length ? (
-            <View style={styles.metaRow}>
-              <Ionicons color={colors.success} name="time-outline" size={16} />
-              <AppText variant="label">{place.openingHours.weekdayText[0]}</AppText>
-            </View>
-          ) : null}
-        </View>
+      {/* Info card */}
+      <View style={styles.infoCard}>
+        <AppText variant="heading">O mjestu</AppText>
+        <AppText tone="muted" style={styles.desc}>{place.description}</AppText>
+        <View style={styles.divider} />
+        <InfoRow icon="location" text={place.address} />
+        <InfoRow icon="star" text={formatRating(place.rating, place.reviewCount)} />
+        {place.openingHours?.weekdayText?.length ? (
+          <InfoRow icon="time-outline" text={place.openingHours.weekdayText[0]} />
+        ) : null}
       </View>
 
-      {/* Quick facts */}
       {place.quickFacts.length > 0 ? (
         <View style={styles.section}>
-          <SectionHeader title="Brže informacije" />
-          <View style={styles.quickFacts}>
-            {place.quickFacts.map((fact) => (
-              <View key={fact.label} style={styles.factCard}>
-                <AppText tone="soft" variant="caption">
-                  {fact.label}
-                </AppText>
-                <AppText style={styles.factValue} variant="bodyLarge">
-                  {fact.value}
-                </AppText>
+          <SectionHeader title="Informacije" />
+          <View style={styles.factsGrid}>
+            {place.quickFacts.map((f) => (
+              <View key={f.label} style={styles.factCard}>
+                <AppText tone="muted" variant="caption">{f.label}</AppText>
+                <AppText variant="body" style={styles.factValue}>{f.value}</AppText>
               </View>
             ))}
           </View>
         </View>
       ) : null}
 
-      {/* Map */}
       <View style={styles.section}>
         <SectionHeader title="Lokacija" />
         <MapPreview address={place.address} lat={place.lat} lng={place.lng} title={place.title} />
       </View>
 
-      {/* Contact */}
       <View style={styles.section}>
-        <SectionHeader title="Kontakt i linkovi" />
+        <SectionHeader title="Kontakt" />
         <View style={styles.contactRow}>
-          {place.phone ? (
-            <ActionButton icon="call-outline" label="Pozovi" onPress={() => Linking.openURL(`tel:${place.phone}`)} variant="ghost" />
-          ) : null}
-          {place.website ? (
-            <ActionButton icon="globe-outline" label="Sajt" onPress={() => Linking.openURL(place.website!)} variant="ghost" />
-          ) : null}
-          {!place.phone && !place.website ? (
-            <AppText tone="muted" variant="label">Kontaktni podaci uskoro.</AppText>
-          ) : null}
+          {place.phone ? <ActionButton icon="call-outline" label="Pozovi" onPress={() => Linking.openURL(`tel:${place.phone}`)} variant="ghost" /> : null}
+          {place.website ? <ActionButton icon="globe-outline" label="Web sajt" onPress={() => Linking.openURL(place.website!)} variant="ghost" /> : null}
+          {!place.phone && !place.website ? <AppText tone="muted" variant="caption">Kontaktni podaci uskoro.</AppText> : null}
         </View>
       </View>
 
-      {/* Related places */}
       {relatedPlaces.length > 0 ? (
         <View style={styles.section}>
           <SectionHeader title="Slična mjesta" />
-          <View style={styles.related}>
-            {relatedPlaces.map((relatedPlace, index) => (
-              <PlaceListItem
-                key={relatedPlace.id}
-                index={index}
-                onPress={() => router.push(`/mjesto/${relatedPlace.slug}` as never)}
-                onPressDirections={() =>
-                  openDirections({ title: relatedPlace.title, lat: relatedPlace.lat, lng: relatedPlace.lng })
-                }
-                place={relatedPlace}
-              />
-            ))}
-          </View>
+          <View style={styles.relatedGrid}>{relatedPlaces.map((rp, i) => (
+            <PlaceListItem key={rp.id} index={i} onPress={() => router.push(`/mjesto/${rp.slug}` as never)} onPressDirections={() => openDirections({ title: rp.title, lat: rp.lat, lng: rp.lng })} place={rp} />
+          ))}</View>
         </View>
       ) : null}
 
-      <View style={styles.sourceCard}>
-        <AppText tone="soft" variant="caption">
-          Izvor: OpenStreetMap
-        </AppText>
+      <View style={{ alignItems: 'center', paddingVertical: spacing.md }}>
+        <AppText tone="soft" variant="caption">Izvor: OpenStreetMap</AppText>
       </View>
     </Screen>
   );
 }
 
+function InfoRow({ icon, text }: { icon: string; text: string }) {
+  return (
+    <View style={infoStyles.row}>
+      <Ionicons color={colors.primary} name={icon as never} size={16} />
+      <AppText variant="body">{text}</AppText>
+    </View>
+  );
+}
+
+const infoStyles = StyleSheet.create({ row: { flexDirection: 'row', alignItems: 'center', gap: spacing.md } });
+
 const styles = StyleSheet.create({
   backBtn: {
-    position: 'absolute',
-    top: spacing.lg,
-    left: spacing.lg,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0,0,0,0.35)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    position: 'absolute', left: spacing.sm, width: 36, height: 36, borderRadius: 18,
+    backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center', ...shadows.soft,
   },
-  actionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
+  actionRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  actionPrimary: { flex: 1 },
+  actionCircle: {
+    width: 46, height: 46, borderRadius: 23, backgroundColor: colors.card,
+    borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center',
   },
-  actionPrimary: {
-    flex: 1,
+  infoCard: {
+    backgroundColor: colors.card, borderRadius: radii.lg, padding: spacing.xl, gap: spacing.md, ...shadows.soft,
   },
-  actionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: radii.pill,
-    backgroundColor: colors.cardAlt,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  metaCard: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.lg,
-    padding: spacing.xl,
-    gap: spacing.md,
-  },
-  descriptionText: {
-    lineHeight: 22,
-  },
-  metaGroup: {
-    gap: spacing.sm,
-    paddingTop: spacing.sm,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
-  },
-  metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  quickFacts: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.md,
-  },
+  desc: { lineHeight: 22 },
+  divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.border },
+  section: { gap: spacing.md },
+  factsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   factCard: {
-    width: '47%',
-    backgroundColor: colors.cardAlt,
-    borderRadius: radii.lg,
-    padding: spacing.lg,
-    gap: spacing.xs,
+    width: '48%', backgroundColor: colors.card, borderRadius: radii.md,
+    padding: spacing.md, gap: spacing.xs, ...shadows.soft,
   },
-  factValue: {
-    fontFamily: 'Manrope_700Bold',
-  },
-  section: {
-    gap: spacing.md,
-  },
-  contactRow: {
-    flexDirection: 'row',
-    gap: spacing.md,
-    flexWrap: 'wrap',
-  },
-  related: {
-    gap: spacing.md,
-  },
-  sourceCard: {
-    alignItems: 'center',
-    paddingVertical: spacing.md,
-  },
+  factValue: { fontFamily: 'Manrope_600SemiBold' },
+  contactRow: { flexDirection: 'row', gap: spacing.sm, flexWrap: 'wrap' },
+  relatedGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
 });

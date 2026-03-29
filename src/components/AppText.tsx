@@ -3,7 +3,7 @@ import { Text, type TextProps } from 'react-native';
 
 import { colors, typography } from '@/src/theme';
 
-type Variant = 'hero' | 'title' | 'heading' | 'subheading' | 'body' | 'bodyLarge' | 'label' | 'caption';
+type Variant = 'hero' | 'title' | 'heading' | 'subheading' | 'body' | 'bodyLarge' | 'overline' | 'label' | 'caption';
 
 type AppTextProps = TextProps & {
   variant?: Variant;
@@ -18,26 +18,29 @@ const fontSizeByVariant: Record<Variant, number> = {
   subheading: typography.subheading,
   body: typography.body,
   bodyLarge: typography.bodyLarge,
+  overline: typography.overline,
   label: typography.label,
   caption: typography.caption,
 };
 
 const lineHeightByVariant: Record<Variant, number> = {
-  hero: 48,
-  title: 38,
-  heading: 32,
-  subheading: 24,
-  body: 22,
-  bodyLarge: 24,
+  hero: 34,
+  title: 28,
+  heading: 24,
+  subheading: 22,
+  body: 20,
+  bodyLarge: 22,
+  overline: 15,
   label: 18,
   caption: 15,
 };
 
-const letterSpacingByVariant: Partial<Record<Variant, number>> = {
-  hero: -0.3,
-  title: -0.2,
-  caption: 0.2,
-  label: 0.1,
+const fontFamilyByVariant: Partial<Record<Variant, string>> = {
+  hero: 'Manrope_700Bold',
+  title: 'Manrope_700Bold',
+  heading: 'Manrope_700Bold',
+  subheading: 'Manrope_600SemiBold',
+  overline: 'Manrope_600SemiBold',
 };
 
 const toneColor = {
@@ -61,8 +64,7 @@ export const AppText = memo(({
         color: toneColor[tone],
         fontSize: fontSizeByVariant[variant],
         lineHeight: lineHeightByVariant[variant],
-        fontFamily: serif ? 'PlayfairDisplay_400Regular' : 'Manrope_400Regular',
-        letterSpacing: letterSpacingByVariant[variant],
+        fontFamily: fontFamilyByVariant[variant] ?? 'Manrope_400Regular',
       },
       style,
     ]}

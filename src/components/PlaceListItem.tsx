@@ -1,13 +1,12 @@
 import { memo } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 
 import { AppText } from '@/src/components/AppText';
 import { getHeroImageUri } from '@/src/constants/heroImages';
 import { formatDistance } from '@/src/lib/format';
-import { colors, radii, spacing } from '@/src/theme';
-import { categoryByKey } from '@/src/constants/categories';
+import { colors, radii, shadows, spacing } from '@/src/theme';
 import type { Place } from '@/src/types/place';
 
 type PlaceListItemProps = {
@@ -19,115 +18,116 @@ type PlaceListItemProps = {
 
 export const PlaceListItem = memo(({ place, onPress, onPressDirections, index = 0 }: PlaceListItemProps) => {
   const thumbUri = getHeroImageUri(place.id, place.category);
-  const categoryColor = categoryByKey[place.category]?.color || colors.primary;
+  const { width } = useWindowDimensions();
+  const isTablet = width >= 768;
+  const cardWidth = isTablet ? (width - spacing.xl * 2 - spacing.md) / 2 : width - spacing.xl * 2;
 
   return (
-    <View style={[styles.row, { borderLeftColor: categoryColor }]}>
-      <Pressable
-        accessibilityRole="link"
-        accessibilityLabel={place.title}
-        onPress={onPress}
-        style={({ pressed }) => [styles.mainArea, pressed && styles.pressed]}>
+    <Pressable
+      accessibilityRole="link"
+      accessibilityLabel={place.title}
+      onPress={onPress}
+      style={({ pressed }) => [styles.card, { width: cardWidth }, pressed && styles.pressed]}>
+
+      {/* Big image */}
+      <View style={styles.imageWrap}>
         {thumbUri ? (
-          <Image source={thumbUri} style={styles.thumb} contentFit="cover" transition={200} />
+          <Image source={thumbUri} style={StyleSheet.absoluteFill} contentFit="cover" transition={250} />
         ) : (
-          <View style={styles.thumbFallback}>
-            <Ionicons color={colors.primary} name="location-outline" size={20} />
+          <View style={styles.imagePlaceholder}>
+            <Ionicons color={colors.primary} name="image-outline" size={28} />
           </View>
         )}
-        <View style={styles.content}>
-          <AppText style={styles.title} variant="bodyLarge" numberOfLines={1}>
-            {place.title}
-          </AppText>
-          <AppText numberOfLines={1} tone="muted" variant="label">
-            {place.address}
-          </AppText>
-          <View style={styles.meta}>
-            {place.distanceMeters != null ? (
-              <View style={styles.metaPill}>
-                <Ionicons color={colors.primary} name="navigate-outline" size={11} />
-                <AppText tone="soft" variant="caption">
-                  {formatDistance(place.distanceMeters)}
-                </AppText>
-              </View>
-            ) : null}
-            {place.rating ? (
-              <View style={styles.metaPill}>
-                <Ionicons color={colors.warning} name="star" size={11} />
-                <AppText tone="soft" variant="caption">
-                  {place.rating.toFixed(1)}
-                </AppText>
-              </View>
-            ) : null}
+
+        {/* Rating badge */}
+        {place.rating ? (
+          <View style={styles.ratingBadge}>
+            <Ionicons color="#FFD700" name="star" size={11} />
+            <AppText style={styles.ratingText} tone="inverse" variant="caption">{place.rating.toFixed(1)}</AppText>
           </View>
+        ) : null}
+
+        {/* Directions button */}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Uputstva"
+          onPress={onPressDirections}
+          style={styles.dirBtn}>
+          <Ionicons color={colors.white} name="navigate" size={14} />
+        </Pressable>
+      </View>
+
+      {/* Content */}
+      <View style={styles.content}>
+        <AppText style={styles.title} numberOfLines={1} variant="subheading">{place.title}</AppText>
+        <View style={styles.locationRow}>
+          <Ionicons color={colors.primary} name="location" size={12} />
+          <AppText numberOfLines={1} tone="muted" variant="caption">{place.address}</AppText>
         </View>
-      </Pressable>
-      <Pressable accessibilityRole="button" accessibilityLabel="Uputstva" onPress={onPressDirections} style={styles.cta}>
-        <Ionicons color={colors.primary} name="navigate-outline" size={20} />
-      </Pressable>
-    </View>
+      </View>
+    </Pressable>
   );
 });
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    padding: spacing.lg,
-    borderRadius: radii.lg,
+  card: {
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderLeftWidth: 4,
-    alignItems: 'center',
-  },
-  mainArea: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
+    borderRadius: radii.lg,
+    overflow: 'hidden',
+    ...shadows.card,
   },
   pressed: {
-    opacity: 0.92,
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
   },
-  thumb: {
-    width: 72,
-    height: 72,
-    borderRadius: radii.lg,
-    shadowColor: '#1F3C4D',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 2,
+  imageWrap: {
+    height: 140,
+    backgroundColor: colors.primaryLight,
   },
-  thumbFallback: {
-    width: 72,
-    height: 72,
-    borderRadius: radii.lg,
-    backgroundColor: colors.cardAlt,
+  imagePlaceholder: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ratingBadge: {
+    position: 'absolute',
+    top: spacing.sm,
+    left: spacing.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    backgroundColor: 'rgba(45,55,72,0.65)',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 3,
+    borderRadius: radii.pill,
+  },
+  ratingText: {
+    fontFamily: 'Manrope_700Bold',
+    fontSize: 11,
+  },
+  dirBtn: {
+    position: 'absolute',
+    top: spacing.sm,
+    right: spacing.sm,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
   content: {
-    flex: 1,
-    gap: 2,
+    padding: spacing.md,
+    gap: spacing.xs,
   },
   title: {
-    fontFamily: 'Manrope_700Bold',
+    fontFamily: 'Manrope_600SemiBold',
+    fontSize: 14,
+    lineHeight: 18,
   },
-  meta: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-    marginTop: 2,
-  },
-  metaPill: {
+  locationRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
-  },
-  cta: {
-    minWidth: 44,
-    minHeight: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
+    gap: 4,
   },
 });

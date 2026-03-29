@@ -1,5 +1,4 @@
-import { Pressable, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 
 import { AppText } from '@/src/components/AppText';
 import { colors, spacing } from '@/src/theme';
@@ -11,33 +10,31 @@ type SectionHeaderProps = {
   onPressAction?: () => void;
 };
 
-export const SectionHeader = ({ title, subtitle, actionLabel, onPressAction }: SectionHeaderProps) => (
-  <View style={styles.row}>
-    <View style={styles.textWrap}>
-      <AppText serif variant="heading">
-        {title}
-      </AppText>
-      {subtitle ? (
-        <AppText style={styles.subtitle} tone="muted">
-          {subtitle}
-        </AppText>
+export const SectionHeader = ({ title, subtitle, actionLabel, onPressAction }: SectionHeaderProps) => {
+  const { width } = useWindowDimensions();
+  const isTablet = width >= 768;
+
+  return (
+    <View style={styles.row}>
+      <View style={styles.textWrap}>
+        <AppText variant={isTablet ? 'title' : 'heading'}>{title}</AppText>
+        {subtitle ? (
+          <AppText tone="muted" variant={isTablet ? 'body' : 'caption'}>{subtitle}</AppText>
+        ) : null}
+      </View>
+      {actionLabel && onPressAction ? (
+        <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel={actionLabel}
+          onPress={onPressAction}
+          style={({ pressed }) => [pressed && styles.actionPressed]}>
+          <AppText style={styles.actionText} variant={isTablet ? 'body' : 'label'}>{actionLabel}</AppText>
+        </Pressable>
       ) : null}
     </View>
-    {actionLabel && onPressAction ? (
-      <Pressable
-        accessible={true}
-        accessibilityRole="button"
-        accessibilityLabel={actionLabel}
-        onPress={onPressAction}
-        style={({ pressed }) => [styles.actionLink, pressed && styles.actionPressed]}>
-        <AppText style={styles.actionText} variant="label">
-          {actionLabel}
-        </AppText>
-        <Ionicons color={colors.secondary} name="chevron-forward" size={14} />
-      </Pressable>
-    ) : null}
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   row: {
@@ -48,20 +45,13 @@ const styles = StyleSheet.create({
   },
   textWrap: {
     flex: 1,
-  },
-  subtitle: {
-    marginTop: spacing.xs,
-  },
-  actionLink: {
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: 2,
   },
   actionPressed: {
     opacity: 0.6,
   },
   actionText: {
-    color: colors.secondary,
+    color: colors.primary,
     fontFamily: 'Manrope_600SemiBold',
   },
 });
