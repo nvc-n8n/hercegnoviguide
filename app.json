@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "hercegnovilatest-temp",
+    "name": "HN Guide",
     "slug": "hercegnovilatest-temp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,14 +9,14 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#3570B8"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#3570B8",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
