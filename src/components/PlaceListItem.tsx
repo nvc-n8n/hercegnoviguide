@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   imageWrap: {
-    height: 140,
+    height: 180,
     backgroundColor: colors.primaryLight,
   },
   imagePlaceholder: {

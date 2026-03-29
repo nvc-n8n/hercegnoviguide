@@ -58,7 +58,7 @@ export default function PlaceDetailScreen() {
         <Pressable
           accessibilityRole="button"
           accessibilityLabel="Nazad"
-          onPress={() => router.back()}
+          onPress={() => router.replace('/(tabs)/pocetna' as never)}
           style={[styles.backBtn, { top: Math.max(insets.top, spacing.lg) }]}>
           <Ionicons color={colors.text} name="chevron-back" size={22} />
         </Pressable>

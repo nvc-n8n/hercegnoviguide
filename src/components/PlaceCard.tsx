@@ -99,11 +99,11 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   imageWrap: {
-    height: 140,
+    height: 160,
     backgroundColor: colors.primaryLight,
   },
   imageWrapTablet: {
-    height: 180,
+    height: 220,
   },
   imagePlaceholder: {
     flex: 1,

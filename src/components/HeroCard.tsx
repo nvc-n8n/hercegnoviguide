@@ -43,8 +43,8 @@ export const HeroCard = ({ title, subtitle, badge, imageSource }: HeroCardProps)
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: radii.xl,
-    height: 260,
+    borderRadius: 0,
+    height: 320,
     overflow: 'hidden',
     backgroundColor: colors.primaryLight,
     marginHorizontal: -spacing.xl,
