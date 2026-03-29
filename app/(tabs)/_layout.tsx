@@ -67,7 +67,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="vise"
         options={{
-          title: 'Više',
+          title: 'Profil',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons color={color} name={focused ? 'person' : 'person-outline'} size={22} />
           ),

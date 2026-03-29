@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 
 import { AppText } from '@/src/components/AppText';
 import { colors, radii, shadows, spacing } from '@/src/theme';
@@ -12,33 +12,47 @@ type MenuItem = {
   subtitle: string;
 };
 
-export const MenuLinkList = ({ items }: { items: MenuItem[] }) => (
-  <View style={styles.list}>
-    {items.map((item) => (
-      <Link asChild href={item.href as never} key={item.href}>
+export const MenuLinkList = ({ items }: { items: MenuItem[] }) => {
+  const screenW = Dimensions.get('window').width;
+  const isTablet = screenW >= 768;
+  const cardWidth = isTablet ? (screenW - spacing.xl * 2 - spacing.md) / 2 : undefined;
+
+  return (
+    <View style={[styles.list, isTablet && styles.listTablet]}>
+      {items.map((item) => (
         <Pressable
+          key={item.href}
           accessible={true}
-          accessibilityRole="link"
+          accessibilityRole="button"
           accessibilityLabel={item.title}
-          accessibilityHint={item.subtitle}
-          style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}>
+          onPress={() => router.push(item.href as never)}
+          style={({ pressed }) => [
+            styles.row,
+            isTablet && { width: cardWidth },
+            pressed && styles.rowPressed,
+          ]}>
           <View style={styles.iconCircle}>
             <Ionicons color={colors.primary} name={item.icon} size={20} />
           </View>
           <View style={styles.content}>
-            <AppText style={styles.title} variant="body">{item.title}</AppText>
+            <AppText style={styles.title}>{item.title}</AppText>
             <AppText tone="muted" variant="caption">{item.subtitle}</AppText>
           </View>
-          <Ionicons color={colors.textSoft} name="chevron-forward" size={18} />
+          <Ionicons color={colors.textSoft} name="chevron-forward" size={16} />
         </Pressable>
-      </Link>
-    ))}
-  </View>
-);
+      ))}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   list: {
     gap: spacing.sm,
+  },
+  listTablet: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.md,
   },
   row: {
     flexDirection: 'row',
@@ -51,7 +65,7 @@ const styles = StyleSheet.create({
   },
   rowPressed: {
     opacity: 0.85,
-    transform: [{ scale: 0.99 }],
+    transform: [{ scale: 0.98 }],
   },
   iconCircle: {
     width: 40,
@@ -60,6 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryLight,
     justifyContent: 'center',
     alignItems: 'center',
+    flexShrink: 0,
   },
   content: {
     flex: 1,
@@ -67,5 +82,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Manrope_600SemiBold',
+    fontSize: 14,
   },
 });
